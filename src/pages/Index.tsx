@@ -1,12 +1,35 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Header } from "@/components/Header";
+import { NewsTicker } from "@/components/NewsTicker";
+import { AlertBanner } from "@/components/AlertBanner";
+import { HeroSection } from "@/components/HeroSection";
+import { NewsGrid } from "@/components/NewsGrid";
+import { Footer } from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen flex flex-col bg-background">
+      {/* News Ticker */}
+      <NewsTicker />
+      
+      {/* Header */}
+      <Header />
+
+      {/* Main Content */}
+      <main className="flex-1">
+        {/* Hero Section */}
+        <HeroSection />
+
+        {/* Alerts */}
+        <div className="container mx-auto px-4 pt-8">
+          <AlertBanner />
+        </div>
+
+        {/* News Grid */}
+        <NewsGrid />
+      </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
