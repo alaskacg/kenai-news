@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Menu, Search, Bell, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import kenaiLogo from "@/assets/kenai-news-logo.jpg";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -26,17 +27,14 @@ export function Header() {
           {/* Logo */}
           <motion.a
             href="/"
-            className="flex items-center gap-3"
+            className="flex items-center"
             whileHover={{ scale: 1.02 }}
           >
-            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center shadow-lg">
-              <span className="text-xl font-display font-bold text-primary-foreground">K</span>
-            </div>
-            <div className="hidden sm:block">
-              <h1 className="text-lg md:text-xl font-display font-bold text-primary tracking-tight">
-                Kenai News
-              </h1>
-            </div>
+            <img 
+              src={kenaiLogo} 
+              alt="Kenai News" 
+              className="h-12 md:h-14 w-auto object-contain"
+            />
           </motion.a>
 
           {/* Desktop Navigation */}
