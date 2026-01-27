@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, Facebook, Twitter, Instagram, ExternalLink, Sparkles } from "lucide-react";
+import kenaiLogo from "@/assets/kenai-news-logo.jpg";
 
 const footerLinks = {
   news: ["Local News", "Outdoors", "Wildlife", "Community", "Weather", "Sports"],
@@ -19,13 +20,12 @@ export function Footer() {
               viewport={{ once: true }}
               className="mb-6"
             >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center">
-                  <span className="text-xl font-display font-bold text-accent-foreground">K</span>
-                </div>
-                <div>
-                  <h3 className="font-display font-bold text-lg">Kenai News</h3>
-                </div>
+              <div className="mb-4">
+                <img 
+                  src={kenaiLogo} 
+                  alt="Kenai News" 
+                  className="h-16 w-auto object-contain"
+                />
               </div>
               <p className="text-sm text-primary-foreground/70 leading-relaxed">
                 Your trusted source for local news, weather, and community updates from 
