@@ -29,14 +29,13 @@ export function Header() {
             className="flex items-center gap-3"
             whileHover={{ scale: 1.02 }}
           >
-            <div className="w-10 h-10 rounded-lg bg-gradient-aurora flex items-center justify-center">
-              <span className="text-xl font-display font-bold text-accent-foreground">K</span>
+            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center shadow-lg">
+              <span className="text-xl font-display font-bold text-primary-foreground">K</span>
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-lg md:text-xl font-display font-bold text-primary">
-                Kenai Peninsula
+              <h1 className="text-lg md:text-xl font-display font-bold text-primary tracking-tight">
+                Kenai News
               </h1>
-              <p className="text-xs text-muted-foreground -mt-1">News & Community</p>
             </div>
           </motion.a>
 
