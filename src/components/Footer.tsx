@@ -38,54 +38,48 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-16 md:py-20 relative">
+      <div className="container mx-auto px-4 py-10 md:py-14 relative">
         {/* Main Footer Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6 mb-10">
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mb-8"
+              className="mb-6"
             >
-              <div className="mb-6">
+              <div className="mb-4">
                 <img 
                   src={kenaiLogo} 
                   alt="Kenai News" 
-                  className="h-16 w-auto object-contain brightness-110"
+                  className="h-12 w-auto object-contain brightness-110"
                 />
               </div>
-              <p className="text-sm text-primary-foreground/70 leading-relaxed max-w-md">
+              <p className="text-xs text-primary-foreground/70 leading-relaxed max-w-sm">
                 Your trusted source for local news, weather, and community updates from 
-                Alaska's breathtaking Kenai Peninsula. Connecting Alaskans since 2024.
+                Alaska's breathtaking Kenai Peninsula.
               </p>
             </motion.div>
 
             {/* Contact Info */}
             <motion.div 
-              className="space-y-3 text-sm text-primary-foreground/60"
+              className="space-y-2 text-xs text-primary-foreground/60"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: 0.1 }}
             >
-              <div className="flex items-center gap-3 hover:text-gold transition-colors cursor-pointer">
-                <div className="p-2 rounded-lg bg-primary-foreground/5">
-                  <MapPin className="h-4 w-4" />
-                </div>
+              <div className="flex items-center gap-2 hover:text-gold transition-colors cursor-pointer">
+                <MapPin className="h-3 w-3" />
                 <span>Kenai, Alaska 99611</span>
               </div>
-              <div className="flex items-center gap-3 hover:text-gold transition-colors cursor-pointer">
-                <div className="p-2 rounded-lg bg-primary-foreground/5">
-                  <Phone className="h-4 w-4" />
-                </div>
+              <div className="flex items-center gap-2 hover:text-gold transition-colors cursor-pointer">
+                <Phone className="h-3 w-3" />
                 <span>(907) 555-0123</span>
               </div>
-              <div className="flex items-center gap-3 hover:text-gold transition-colors cursor-pointer">
-                <div className="p-2 rounded-lg bg-primary-foreground/5">
-                  <Mail className="h-4 w-4" />
-                </div>
+              <div className="flex items-center gap-2 hover:text-gold transition-colors cursor-pointer">
+                <Mail className="h-3 w-3" />
                 <span>news@kenainews.com</span>
               </div>
             </motion.div>
@@ -93,20 +87,15 @@ export function Footer() {
 
           {/* News Links */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
           >
-            <h4 className="font-display font-bold text-lg mb-6 text-primary-foreground">News</h4>
-            <ul className="space-y-3">
+            <h4 className="font-display font-bold text-sm mb-4 text-primary-foreground">News</h4>
+            <ul className="space-y-2">
               {footerLinks.news.map((link) => (
                 <li key={link}>
-                  <a
-                    href="#"
-                    className="text-sm text-primary-foreground/60 hover:text-gold transition-colors flex items-center gap-2 group"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent/50 group-hover:bg-gold transition-colors" />
+                  <a href="#" className="text-xs text-primary-foreground/60 hover:text-gold transition-colors">
                     {link}
                   </a>
                 </li>
@@ -116,20 +105,16 @@ export function Footer() {
 
           {/* Regions */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.1 }}
           >
-            <h4 className="font-display font-bold text-lg mb-6 text-primary-foreground">Regions</h4>
-            <ul className="space-y-3">
+            <h4 className="font-display font-bold text-sm mb-4 text-primary-foreground">Regions</h4>
+            <ul className="space-y-2">
               {footerLinks.regions.map((link) => (
                 <li key={link}>
-                  <a
-                    href="#"
-                    className="text-sm text-primary-foreground/60 hover:text-gold transition-colors flex items-center gap-2 group"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-aurora/50 group-hover:bg-gold transition-colors" />
+                  <a href="#" className="text-xs text-primary-foreground/60 hover:text-gold transition-colors">
                     {link}
                   </a>
                 </li>
@@ -139,44 +124,43 @@ export function Footer() {
 
           {/* Newsletter */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.2 }}
           >
-            <h4 className="font-display font-bold text-lg mb-6 text-primary-foreground">Stay Connected</h4>
-            <p className="text-sm text-primary-foreground/60 mb-5">
-              Get the latest Alaska news delivered to your inbox every morning.
+            <h4 className="font-display font-bold text-sm mb-4 text-primary-foreground">Stay Connected</h4>
+            <p className="text-xs text-primary-foreground/60 mb-3">
+              Get Alaska news in your inbox.
             </p>
-            <form className="space-y-3">
+            <form className="space-y-2">
               <div className="relative">
                 <input
                   type="email"
-                  placeholder="Enter your email"
-                  className="w-full px-4 py-3 rounded-xl bg-primary-foreground/5 border border-primary-foreground/10 text-primary-foreground placeholder:text-primary-foreground/30 text-sm focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold/50 transition-all"
+                  placeholder="Your email"
+                  className="w-full px-3 py-2 rounded-lg bg-primary-foreground/5 border border-primary-foreground/10 text-primary-foreground placeholder:text-primary-foreground/30 text-xs focus:outline-none focus:ring-1 focus:ring-gold/50 transition-all"
                 />
                 <motion.button
                   type="submit"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-lg bg-gold text-gold-foreground"
+                  className="absolute right-1.5 top-1/2 -translate-y-1/2 p-1.5 rounded-md bg-gold text-gold-foreground"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Send className="h-4 w-4" />
+                  <Send className="h-3 w-3" />
                 </motion.button>
               </div>
             </form>
 
             {/* Social Links */}
-            <div className="flex items-center gap-3 mt-6">
+            <div className="flex items-center gap-2 mt-4">
               {[Facebook, Twitter, Instagram, Youtube].map((Icon, index) => (
                 <motion.a 
                   key={index}
                   href="#" 
-                  className="p-2.5 rounded-xl bg-primary-foreground/5 text-primary-foreground/50 hover:bg-gold/20 hover:text-gold transition-all"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="p-2 rounded-lg bg-primary-foreground/5 text-primary-foreground/50 hover:bg-gold/20 hover:text-gold transition-all"
+                  whileHover={{ scale: 1.1 }}
                 >
-                  <Icon className="h-5 w-5" />
+                  <Icon className="h-4 w-4" />
                 </motion.a>
               ))}
             </div>
@@ -185,54 +169,37 @@ export function Footer() {
 
         {/* Alaska Listings Advertisement */}
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative p-8 rounded-2xl overflow-hidden mb-12"
+          className="relative p-5 rounded-xl overflow-hidden mb-8"
         >
           {/* Gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-r from-accent/20 via-aurora/15 to-gold/20" />
-          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-primary/50 to-transparent" />
-          <div className="absolute inset-[1px] rounded-2xl bg-gradient-midnight/80 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-gradient-to-r from-accent/15 via-aurora/10 to-gold/15" />
+          <div className="absolute inset-[1px] rounded-xl bg-gradient-midnight/80 backdrop-blur-sm" />
           
-          {/* Animated border */}
-          <motion.div 
-            className="absolute inset-0 rounded-2xl"
-            style={{
-              background: "linear-gradient(90deg, transparent, hsl(var(--gold)), transparent)",
-              backgroundSize: "200% 100%",
-            }}
-            animate={{ backgroundPosition: ["200% 0", "-200% 0"] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-          />
-          
-          <div className="relative flex flex-col lg:flex-row items-center justify-between gap-8">
-            <div className="flex items-start gap-5">
+          <div className="relative flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
               <motion.div 
-                className="p-4 rounded-2xl bg-gradient-to-br from-gold/30 to-accent/20"
+                className="p-3 rounded-xl bg-gradient-to-br from-gold/30 to-accent/20"
                 animate={{ rotate: [0, 5, -5, 0] }}
                 transition={{ duration: 5, repeat: Infinity }}
               >
-                <Mountain className="h-8 w-8 text-gold" />
+                <Mountain className="h-6 w-6 text-gold" />
               </motion.div>
               <div>
-                <div className="flex items-center gap-3 mb-2">
+                <div className="flex items-center gap-2 mb-1">
                   <motion.span 
-                    className="px-3 py-1 text-xs font-bold bg-coral text-coral-foreground rounded-full"
-                    animate={{ scale: [1, 1.05, 1] }}
+                    className="px-2 py-0.5 text-xs font-bold bg-coral text-coral-foreground rounded-full"
+                    animate={{ scale: [1, 1.03, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   >
                     BETA
                   </motion.span>
-                  <h4 className="font-display font-bold text-xl text-primary-foreground">Alaska Listings</h4>
+                  <h4 className="font-display font-bold text-base text-primary-foreground">Alaska Listings</h4>
                 </div>
-                <p className="text-sm text-primary-foreground/70 max-w-lg mb-3">
-                  Discover Alaska's newest private listings marketplace! Regional pages for every corner of Alaska — 
-                  from Kenai to Fairbanks, Anchorage to Juneau.
-                </p>
-                <p className="text-sm font-semibold text-gold flex items-center gap-2">
-                  <Sparkles className="h-4 w-4" />
-                  Get a FREE 60-day listing during our Beta launch!
+                <p className="text-xs text-primary-foreground/70 max-w-md">
+                  Alaska's newest marketplace! <span className="text-gold font-semibold">FREE 60-day listing</span> during Beta.
                 </p>
               </div>
             </div>
@@ -240,30 +207,30 @@ export function Footer() {
               href="https://aklistings.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-gold to-gold/80 text-gold-foreground font-bold text-sm hover:shadow-xl hover:shadow-gold/20 transition-all whitespace-nowrap"
-              whileHover={{ scale: 1.03 }}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gradient-to-r from-gold to-gold/80 text-gold-foreground font-bold text-xs hover:shadow-lg transition-all"
+              whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              Visit aklistings.com
-              <ExternalLink className="h-4 w-4" />
+              aklistings.com
+              <ExternalLink className="h-3 w-3" />
             </motion.a>
           </div>
         </motion.div>
 
         {/* Bottom Bar */}
         <motion.div 
-          className="pt-8 border-t border-primary-foreground/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-primary-foreground/40"
+          className="pt-6 border-t border-primary-foreground/10 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-primary-foreground/40"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
-            <p>© {new Date().getFullYear()} Kenai News. All rights reserved.</p>
+          <div className="flex flex-col md:flex-row items-center gap-1 md:gap-3">
+            <p>© {new Date().getFullYear()} Kenai News</p>
             <span className="hidden md:inline text-primary-foreground/20">•</span>
             <p>A property of <span className="text-gold font-medium">Alaska Listings LLC</span></p>
           </div>
-          <p className="flex items-center gap-2">
-            Made with <Heart className="h-4 w-4 text-coral fill-coral" /> in Alaska
+          <p className="flex items-center gap-1">
+            Made with <Heart className="h-3 w-3 text-coral fill-coral" /> in Alaska
           </p>
         </motion.div>
       </div>

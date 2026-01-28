@@ -42,7 +42,7 @@ const Index = () => {
         <SecondaryTicker />
 
         {/* Alerts Section */}
-        <section className="container mx-auto px-4 pt-10">
+        <section className="container mx-auto px-4 pt-6">
           <AlertBanner />
         </section>
 
