@@ -1,9 +1,10 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Clock, MapPin, ArrowRight, TrendingUp } from "lucide-react";
+import { Clock, MapPin, ArrowRight, TrendingUp, Smartphone, Apple } from "lucide-react";
 import { useNewsArticles } from "@/hooks/useNews";
 import heroImage from "@/assets/hero-mountains.jpg";
 import { useRef } from "react";
 import { HeroNewsCard } from "./HeroNewsCard";
+import { SiGoogleplay } from "react-icons/si";
 
 export function HeroSection() {
   const { data: articles } = useNewsArticles();
@@ -50,11 +51,52 @@ export function HeroSection() {
         <div className="grid lg:grid-cols-5 gap-6">
           {/* Main Story - Left Column */}
           <div className="lg:col-span-3">
-            {/* Location Badge */}
+            {/* Site Title & App Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
+              className="mb-6"
+            >
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary-foreground leading-tight mb-4">
+                Kenai News
+              </h1>
+              
+              {/* Get the App Buttons */}
+              <div className="flex flex-wrap items-center gap-3">
+                <motion.a
+                  href="#"
+                  className="group flex items-center gap-2 px-4 py-2.5 bg-primary-foreground/10 hover:bg-primary-foreground/20 backdrop-blur-sm border border-primary-foreground/20 rounded-xl transition-all duration-300"
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Apple className="h-6 w-6 text-primary-foreground" />
+                  <div className="text-left">
+                    <span className="block text-[10px] text-primary-foreground/70 leading-tight">Download on the</span>
+                    <span className="block text-sm font-semibold text-primary-foreground leading-tight">App Store</span>
+                  </div>
+                </motion.a>
+                
+                <motion.a
+                  href="#"
+                  className="group flex items-center gap-2 px-4 py-2.5 bg-primary-foreground/10 hover:bg-primary-foreground/20 backdrop-blur-sm border border-primary-foreground/20 rounded-xl transition-all duration-300"
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <SiGoogleplay className="h-5 w-5 text-primary-foreground" />
+                  <div className="text-left">
+                    <span className="block text-[10px] text-primary-foreground/70 leading-tight">Get it on</span>
+                    <span className="block text-sm font-semibold text-primary-foreground leading-tight">Google Play</span>
+                  </div>
+                </motion.a>
+              </div>
+            </motion.div>
+
+            {/* Location Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
               className="flex items-center gap-2 mb-4"
             >
               <span className="glass-dark px-3 py-1.5 rounded-full flex items-center gap-2 text-xs text-primary-foreground">
@@ -125,9 +167,9 @@ export function HeroSection() {
               </motion.article>
             ) : (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                <h1 className="text-2xl md:text-4xl font-display font-bold text-primary-foreground leading-tight">
-                  Your Voice for the Kenai Peninsula
-                </h1>
+                <p className="text-lg md:text-xl text-primary-foreground/80 max-w-lg">
+                  Your trusted source for Kenai Peninsula news, weather, and community updates.
+                </p>
               </motion.div>
             )}
 
