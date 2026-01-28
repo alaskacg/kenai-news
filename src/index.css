@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Bebas+Neue&display=swap');
 
+/* 3D perspective for animated text */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

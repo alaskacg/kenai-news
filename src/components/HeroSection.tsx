@@ -31,8 +31,10 @@ export function HeroSection() {
     return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
   };
 
+  const titleText = "Kenai News";
+
   return (
-    <section ref={sectionRef} className="relative min-h-[70vh] flex items-end overflow-hidden">
+    <section ref={sectionRef} className="relative min-h-[70vh] flex flex-col overflow-hidden">
       {/* Parallax Background */}
       <motion.div className="absolute inset-0" style={{ y: imageY, scale }}>
         <img
@@ -45,22 +47,53 @@ export function HeroSection() {
         <div className="absolute inset-0 noise-overlay" />
       </motion.div>
 
+      {/* Animated Title - Top Center */}
+      <motion.div 
+        className="relative z-10 flex justify-center pt-8 md:pt-12"
+        animate={{
+          textShadow: [
+            "0 0 20px rgba(100, 150, 200, 0.3)",
+            "0 0 40px rgba(100, 150, 200, 0.5)",
+            "0 0 20px rgba(100, 150, 200, 0.3)",
+          ],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary-foreground tracking-tight flex overflow-hidden perspective-1000">
+          {titleText.split("").map((letter, i) => (
+            <motion.span
+              key={i}
+              initial={{ opacity: 0, y: 50, rotateX: -90 }}
+              animate={{ opacity: 1, y: 0, rotateX: 0 }}
+              transition={{
+                delay: i * 0.08,
+                duration: 0.6,
+                ease: "easeOut",
+              }}
+              className={`inline-block ${letter === " " ? "w-3 md:w-4" : ""} hover:text-accent transition-colors duration-300`}
+              style={{ transformStyle: "preserve-3d" }}
+              whileHover={{ 
+                scale: 1.2, 
+                y: -5,
+                color: "hsl(var(--accent))",
+                transition: { duration: 0.2 } 
+              }}
+            >
+              {letter === " " ? "\u00A0" : letter}
+            </motion.span>
+          ))}
+        </h1>
+      </motion.div>
+
       {/* Content */}
-      <motion.div style={{ opacity }} className="relative container mx-auto px-4 py-8 md:py-12">
-        <div className="grid lg:grid-cols-5 gap-6">
+      <motion.div style={{ opacity }} className="relative flex-1 flex items-end container mx-auto px-4 py-8 md:py-12">
+        <div className="grid lg:grid-cols-5 gap-6 w-full">
           {/* Main Story - Left Column */}
           <div className="lg:col-span-3">
-            {/* Site Title */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="mb-4"
-            >
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-primary-foreground leading-tight">
-                Kenai News
-              </h1>
-            </motion.div>
 
             {/* Breaking Badge */}
             {breakingArticle && (
