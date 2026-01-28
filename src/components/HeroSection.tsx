@@ -1,48 +1,15 @@
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import { Clock, ArrowRight, TrendingUp } from "lucide-react";
 import { useNewsArticles } from "@/hooks/useNews";
-import heroImage from "@/assets/hero-kenai-river.jpg";
-import { useRef, useEffect, useState } from "react";
+import heroImage from "@/assets/hero-kenai-winter.jpg";
 import { HeroNewsCard } from "./HeroNewsCard";
+import { Snowfall } from "./Snowfall";
 
 export function HeroSection() {
   const { data: articles } = useNewsArticles();
   const breakingArticle = articles?.find((a) => a.is_breaking);
   const featuredArticles = articles?.filter((a) => a.is_featured).slice(0, 3) || [];
   const topStories = articles?.filter((a) => !a.is_breaking && !a.is_featured).slice(0, 4) || [];
-  const sectionRef = useRef<HTMLElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"]
-  });
-
-  // Advanced parallax transforms
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.4]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
-  const blur = useTransform(scrollYProgress, [0, 1], [0, 4]);
-  
-  // Mouse parallax effect
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springConfig = { stiffness: 50, damping: 20 };
-  const mouseXSpring = useSpring(mouseX, springConfig);
-  const mouseYSpring = useSpring(mouseY, springConfig);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      const { innerWidth, innerHeight } = window;
-      mouseX.set((clientX - innerWidth / 2) / 50);
-      mouseY.set((clientY - innerHeight / 2) / 50);
-      setMousePosition({ x: clientX / innerWidth, y: clientY / innerHeight });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
 
   const formatTime = (dateString: string) => {
     const date = new Date(dateString);
@@ -57,97 +24,42 @@ export function HeroSection() {
   const titleText = "Kenai News";
 
   return (
-    <section ref={sectionRef} className="relative min-h-[70vh] flex flex-col overflow-hidden">
-      {/* Advanced Parallax Background with Mouse Tracking */}
-      <motion.div 
-        className="absolute inset-0" 
-        style={{ 
-          y: imageY, 
-          scale,
-          x: mouseXSpring,
-        }}
-      >
+    <section className="relative min-h-[70vh] flex flex-col overflow-hidden">
+      {/* Winter Background Image */}
+      <div className="absolute inset-0">
         <motion.img
           src={heroImage}
-          alt="Kenai Peninsula Community"
+          alt="Kenai Peninsula Winter"
           className="w-full h-full object-cover"
-          style={{ 
-            filter: `blur(${blur}px)`,
-          }}
-          initial={{ scale: 1.1 }}
+          initial={{ scale: 1.05 }}
           animate={{ scale: 1 }}
           transition={{ duration: 2, ease: "easeOut" }}
         />
         
-        {/* Animated gradient overlays */}
-        <motion.div 
-          className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent"
-          animate={{
-            opacity: [0.7, 0.8, 0.7],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div 
-          className="absolute inset-0 bg-gradient-to-r from-primary/70 via-transparent to-primary/30"
-          style={{
-            backgroundPosition: `${mousePosition.x * 100}% ${mousePosition.y * 100}%`,
-          }}
-        />
-        
-        {/* Floating light particles effect */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-primary-foreground/20 rounded-full"
-              style={{
-                left: `${15 + i * 15}%`,
-                top: `${20 + (i % 3) * 25}%`,
-              }}
-              animate={{
-                y: [0, -30, 0],
-                opacity: [0.2, 0.5, 0.2],
-                scale: [1, 1.5, 1],
-              }}
-              transition={{
-                duration: 4 + i,
-                repeat: Infinity,
-                delay: i * 0.5,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
-        </div>
+        {/* Gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/50 via-transparent to-primary/30" />
         
         {/* Subtle vignette */}
-        <div className="absolute inset-0 bg-radial-gradient pointer-events-none" 
+        <div 
+          className="absolute inset-0 pointer-events-none" 
           style={{
             background: "radial-gradient(ellipse at center, transparent 40%, hsl(var(--primary) / 0.4) 100%)"
           }}
         />
         
         <div className="absolute inset-0 noise-overlay" />
-      </motion.div>
+      </div>
 
-      {/* Animated Title - Top Center - Reduced Size */}
+      {/* Falling Snow Animation */}
+      <Snowfall count={80} />
+
+      {/* Animated Title - Top Center */}
       <motion.div 
-        className="relative z-10 flex justify-center pt-6 md:pt-10"
-        animate={{
-          textShadow: [
-            "0 0 15px rgba(100, 150, 200, 0.2)",
-            "0 0 30px rgba(100, 150, 200, 0.4)",
-            "0 0 15px rgba(100, 150, 200, 0.2)",
-          ],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        className="relative z-20 flex justify-center pt-6 md:pt-10"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
       >
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-primary-foreground tracking-tight flex overflow-hidden perspective-1000">
           {titleText.split("").map((letter, i) => (
@@ -156,7 +68,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 30, rotateX: -90 }}
               animate={{ opacity: 1, y: 0, rotateX: 0 }}
               transition={{
-                delay: i * 0.06,
+                delay: 0.5 + i * 0.06,
                 duration: 0.5,
                 ease: "easeOut",
               }}
@@ -176,7 +88,7 @@ export function HeroSection() {
       </motion.div>
 
       {/* Content */}
-      <motion.div style={{ opacity }} className="relative flex-1 flex items-end container mx-auto px-4 py-8 md:py-12">
+      <div className="relative z-20 flex-1 flex items-end container mx-auto px-4 py-8 md:py-12">
         <div className="grid lg:grid-cols-5 gap-6 w-full">
           {/* Main Story - Left Column */}
           <div className="lg:col-span-3">
@@ -279,10 +191,10 @@ export function HeroSection() {
             </motion.div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
     </section>
   );
 }
