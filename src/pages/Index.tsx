@@ -37,11 +37,6 @@ const Index = () => {
         {/* Secondary Updates Ticker */}
         <SecondaryTicker />
 
-        {/* Alerts Section */}
-        <section className="container mx-auto px-4 pt-6">
-          <AlertBanner />
-        </section>
-
         {/* News Grid */}
         <NewsGrid />
       </main>

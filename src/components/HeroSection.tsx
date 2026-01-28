@@ -21,8 +21,6 @@ export function HeroSection() {
     return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
   };
 
-  const titleText = "Kenai News";
-
   return (
     <section className="relative min-h-[70vh] flex flex-col overflow-hidden">
       {/* Winter Background Image */}
@@ -53,39 +51,6 @@ export function HeroSection() {
 
       {/* Falling Snow Animation */}
       <Snowfall count={80} />
-
-      {/* Animated Title - Top Center */}
-      <motion.div 
-        className="relative z-20 flex justify-center pt-6 md:pt-10"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-      >
-        <h1 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-primary-foreground tracking-tight flex overflow-hidden perspective-1000">
-          {titleText.split("").map((letter, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0, y: 30, rotateX: -90 }}
-              animate={{ opacity: 1, y: 0, rotateX: 0 }}
-              transition={{
-                delay: 0.5 + i * 0.06,
-                duration: 0.5,
-                ease: "easeOut",
-              }}
-              className={`inline-block ${letter === " " ? "w-2 md:w-3" : ""} hover:text-accent transition-colors duration-300`}
-              style={{ transformStyle: "preserve-3d" }}
-              whileHover={{ 
-                scale: 1.15, 
-                y: -3,
-                color: "hsl(var(--accent))",
-                transition: { duration: 0.2 } 
-              }}
-            >
-              {letter === " " ? "\u00A0" : letter}
-            </motion.span>
-          ))}
-        </h1>
-      </motion.div>
 
       {/* Content */}
       <div className="relative z-20 flex-1 flex items-end container mx-auto px-4 py-8 md:py-12">
