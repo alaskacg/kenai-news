@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import { useNewsArticles } from "@/hooks/useNews";
-import { NewsCard } from "./NewsCard";
+import { ExpandableNewsCard } from "./ExpandableNewsCard";
 import { AuroraWidget } from "./AuroraWidget";
 import { FloatingQuote } from "./AlaskaQuotes";
 import { Skeleton } from "@/components/ui/skeleton";
-import { TrendingUp, Sparkles, Calendar, ArrowUpRight } from "lucide-react";
+import { TrendingUp, Sparkles, Calendar } from "lucide-react";
 
 export function NewsGrid() {
   const { data: articles, isLoading } = useNewsArticles();
@@ -58,18 +58,10 @@ export function NewsGrid() {
                   Latest Stories
                 </h2>
                 <p className="text-muted-foreground text-xs mt-0.5">
-                  News from the Last Frontier
+                  News from the Last Frontier — Click to expand full articles
                 </p>
               </div>
             </div>
-            <motion.a
-              href="#"
-              className="hidden md:flex items-center gap-1 text-xs font-semibold text-accent hover:text-accent/80 transition-colors group"
-              whileHover={{ x: 2 }}
-            >
-              View all
-              <ArrowUpRight className="h-3 w-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </motion.a>
           </motion.div>
 
           {/* Featured Articles */}
@@ -81,14 +73,14 @@ export function NewsGrid() {
               transition={{ delay: 0.1 }}
             >
               {featuredArticles.slice(0, 1).map((article, index) => (
-                <NewsCard key={article.id} article={article} variant="featured" index={index} />
+                <ExpandableNewsCard key={article.id} article={article} variant="featured" index={index} />
               ))}
             </motion.div>
           )}
 
           {/* Regular Articles Grid */}
           <div className="grid md:grid-cols-2 gap-4">
-            {regularArticles.slice(0, 4).map((article, index) => (
+            {regularArticles.slice(0, 6).map((article, index) => (
               <motion.div
                 key={article.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -96,26 +88,25 @@ export function NewsGrid() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.05 * index }}
               >
-                <NewsCard article={article} index={index} />
+                <ExpandableNewsCard article={article} index={index} />
               </motion.div>
             ))}
           </div>
 
-          {/* Load More */}
-          <motion.div 
-            className="text-center pt-4"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <motion.button
-              className="px-6 py-2 rounded-lg border border-accent/30 text-accent font-semibold text-sm hover:bg-accent hover:text-accent-foreground transition-all duration-300"
-              whileHover={{ scale: 1.02, borderColor: "hsl(var(--accent))" }}
-              whileTap={{ scale: 0.98 }}
+          {/* Additional Featured if available */}
+          {featuredArticles.length > 1 && (
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="space-y-4"
             >
-              Load More Stories
-            </motion.button>
-          </motion.div>
+              {featuredArticles.slice(1).map((article, index) => (
+                <ExpandableNewsCard key={article.id} article={article} variant="featured" index={index + 1} />
+              ))}
+            </motion.div>
+          )}
         </div>
 
         {/* Sidebar */}
@@ -144,7 +135,7 @@ export function NewsGrid() {
             </div>
             <div className="divide-y divide-border">
               {regularArticles.slice(0, 4).map((article, index) => (
-                <NewsCard key={article.id} article={article} variant="compact" index={index} />
+                <ExpandableNewsCard key={article.id} article={article} variant="compact" index={index} />
               ))}
             </div>
           </motion.div>

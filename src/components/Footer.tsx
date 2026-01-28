@@ -1,15 +1,19 @@
 import { motion } from "framer-motion";
 import { 
-  Mail, MapPin, Phone, Facebook, Twitter, Instagram, Youtube, 
-  ExternalLink, Sparkles, Mountain, ArrowUpRight, Heart, Send
+  Mail, Facebook, Twitter, Instagram, Youtube, 
+  ExternalLink, Mountain, Heart, Send, Globe
 } from "lucide-react";
 import kenaiLogo from "@/assets/kenai-news-logo.jpg";
 
-const footerLinks = {
-  news: ["Local News", "Outdoors", "Wildlife", "Community", "Weather", "Sports"],
-  regions: ["Kenai", "Soldotna", "Homer", "Seward", "Anchorage", "Fairbanks"],
-  about: ["About Us", "Contact", "Advertise", "Careers", "Terms", "Privacy"],
-};
+const regionalSites = [
+  { name: "Anchorage Chronicle", url: "https://anchoragechronicle.com" },
+  { name: "Alcan News", url: "https://alcannews.com" },
+  { name: "Tongass News", url: "https://tongassnews.com" },
+  { name: "Chugach News", url: "https://chugachnews.com" },
+  { name: "Kenai News", url: "https://kenainews.com" },
+];
+
+const newsCategories = ["Local News", "Outdoors", "Wildlife", "Community", "Weather", "Sports"];
 
 export function Footer() {
   return (
@@ -62,7 +66,7 @@ export function Footer() {
               </p>
             </motion.div>
 
-            {/* Contact Info */}
+            {/* Contact Info - Email Only */}
             <motion.div 
               className="space-y-2 text-xs text-primary-foreground/60"
               initial={{ opacity: 0 }}
@@ -70,18 +74,13 @@ export function Footer() {
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
             >
-              <div className="flex items-center gap-2 hover:text-gold transition-colors cursor-pointer">
-                <MapPin className="h-3 w-3" />
-                <span>Kenai, Alaska 99611</span>
-              </div>
-              <div className="flex items-center gap-2 hover:text-gold transition-colors cursor-pointer">
-                <Phone className="h-3 w-3" />
-                <span>(907) 555-0123</span>
-              </div>
-              <div className="flex items-center gap-2 hover:text-gold transition-colors cursor-pointer">
+              <a 
+                href="mailto:support@alaskanewscorporation.com" 
+                className="flex items-center gap-2 hover:text-gold transition-colors"
+              >
                 <Mail className="h-3 w-3" />
-                <span>news@kenainews.com</span>
-              </div>
+                <span>support@alaskanewscorporation.com</span>
+              </a>
             </motion.div>
           </div>
 
@@ -93,9 +92,9 @@ export function Footer() {
           >
             <h4 className="font-display font-bold text-sm mb-4 text-primary-foreground">News</h4>
             <ul className="space-y-2">
-              {footerLinks.news.map((link) => (
+              {newsCategories.map((link) => (
                 <li key={link}>
-                  <a href="#" className="text-xs text-primary-foreground/60 hover:text-gold transition-colors">
+                  <a href="#news" className="text-xs text-primary-foreground/60 hover:text-gold transition-colors">
                     {link}
                   </a>
                 </li>
@@ -103,19 +102,28 @@ export function Footer() {
             </ul>
           </motion.div>
 
-          {/* Regions */}
+          {/* Regional Sites */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            <h4 className="font-display font-bold text-sm mb-4 text-primary-foreground">Regions</h4>
+            <h4 className="font-display font-bold text-sm mb-4 text-primary-foreground flex items-center gap-2">
+              <Globe className="h-4 w-4 text-gold" />
+              Regional News
+            </h4>
             <ul className="space-y-2">
-              {footerLinks.regions.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-xs text-primary-foreground/60 hover:text-gold transition-colors">
-                    {link}
+              {regionalSites.map((site) => (
+                <li key={site.name}>
+                  <a 
+                    href={site.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-xs text-primary-foreground/60 hover:text-gold transition-colors flex items-center gap-1.5 group"
+                  >
+                    {site.name}
+                    <ExternalLink className="h-2.5 w-2.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </a>
                 </li>
               ))}
@@ -227,7 +235,7 @@ export function Footer() {
           <div className="flex flex-col md:flex-row items-center gap-1 md:gap-3">
             <p>© {new Date().getFullYear()} Kenai News</p>
             <span className="hidden md:inline text-primary-foreground/20">•</span>
-            <p>A property of <span className="text-gold font-medium">Alaska Listings LLC</span></p>
+            <p>A property of <span className="text-gold font-medium">Alaska News Corporation</span></p>
           </div>
           <p className="flex items-center gap-1">
             Made with <Heart className="h-3 w-3 text-coral fill-coral" /> in Alaska
