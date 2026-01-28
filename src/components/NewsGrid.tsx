@@ -54,11 +54,11 @@ export function NewsGrid() {
                 <Sparkles className="h-5 w-5 text-accent-foreground" />
               </div>
               <div>
-                <h2 className="text-xl md:text-2xl font-display font-bold text-foreground">
-                  Latest Stories
-                </h2>
-                <p className="text-muted-foreground text-xs mt-0.5">
-                  News from the Last Frontier — Click to expand full articles
+              <h2 className="text-xl md:text-2xl font-display font-bold text-foreground">
+                Latest News
+              </h2>
+              <p className="text-muted-foreground text-xs mt-0.5">
+                Fresh updates from the Kenai Peninsula — Click to expand full articles
                 </p>
               </div>
             </div>

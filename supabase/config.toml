@@ -1,1 +1,4 @@
 project_id = "nlcsrthhfvaopshqkage"
+
+[functions.generate-daily-news]
+verify_jwt = false
