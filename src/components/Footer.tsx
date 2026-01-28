@@ -1,18 +1,9 @@
 import { motion } from "framer-motion";
 import { 
-  Mail, Facebook, Twitter, Instagram, Youtube, 
-  ExternalLink, Mountain, Heart, Send, Globe
+  Mail, ExternalLink, Heart, Send, Bell, Apple
 } from "lucide-react";
-
-const regionalSites = [
-  { name: "Anchorage Chronicle", url: "https://anchoragechronicle.com" },
-  { name: "Alcan News", url: "https://alcannews.com" },
-  { name: "Tongass News", url: "https://tongassnews.com" },
-  { name: "Chugach News", url: "https://chugachnews.com" },
-  { name: "Kenai News", url: "https://kenainews.com" },
-];
-
-const newsCategories = ["Local News", "Outdoors", "Wildlife", "Community", "Weather", "Sports"];
+import { SiGoogleplay } from "react-icons/si";
+import alaskaListingsLogo from "@/assets/alaska-listings-logo.jpg";
 
 export function Footer() {
   return (
@@ -42,10 +33,108 @@ export function Footer() {
       </div>
 
       <div className="container mx-auto px-4 py-10 md:py-14 relative">
-        {/* Main Footer Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6 mb-10">
+        {/* Alaska Listings Premium Advertisement */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="relative rounded-2xl overflow-hidden mb-10"
+        >
+          {/* Dark slate gradient background matching the logo */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#1a2330] via-[#1e2a3a] to-[#232d3d]" />
+          
+          {/* Subtle tech grid pattern overlay */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
+            <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
+            <div className="absolute top-0 left-0 h-full w-px bg-gradient-to-b from-transparent via-cyan-400/30 to-transparent" />
+            <div className="absolute top-0 right-0 h-full w-px bg-gradient-to-b from-transparent via-cyan-400/30 to-transparent" />
+            {/* Corner accents */}
+            <div className="absolute top-4 left-4 w-12 h-12 border-l border-t border-cyan-400/20" />
+            <div className="absolute bottom-4 right-4 w-12 h-12 border-r border-b border-cyan-400/20" />
+          </div>
+
+          {/* Glowing dots like in the logo */}
+          <motion.div 
+            className="absolute top-8 right-20 w-2 h-2 bg-cyan-400 rounded-full blur-[2px]"
+            animate={{ opacity: [0.4, 1, 0.4] }}
+            transition={{ duration: 3, repeat: Infinity }}
+          />
+          <motion.div 
+            className="absolute top-16 right-32 w-1.5 h-1.5 bg-orange-400 rounded-full blur-[1px]"
+            animate={{ opacity: [0.3, 0.8, 0.3] }}
+            transition={{ duration: 4, repeat: Infinity, delay: 1 }}
+          />
+          <motion.div 
+            className="absolute bottom-12 left-24 w-1 h-1 bg-cyan-300 rounded-full"
+            animate={{ opacity: [0.2, 0.7, 0.2] }}
+            transition={{ duration: 2.5, repeat: Infinity, delay: 0.5 }}
+          />
+          
+          <div className="relative p-6 md:p-8">
+            <div className="flex flex-col lg:flex-row items-center gap-6">
+              {/* Logo Image */}
+              <motion.div 
+                className="flex-shrink-0 w-full lg:w-auto"
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <img 
+                  src={alaskaListingsLogo} 
+                  alt="Alaska Listings" 
+                  className="w-full lg:w-72 h-auto rounded-lg shadow-2xl shadow-black/50"
+                />
+              </motion.div>
+
+              {/* Content */}
+              <div className="flex-1 text-center lg:text-left">
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-3">
+                  <motion.span 
+                    className="px-3 py-1 text-xs font-bold bg-gradient-to-r from-cyan-500 to-cyan-400 text-slate-900 rounded-full uppercase tracking-wider"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    Beta
+                  </motion.span>
+                  <span className="px-3 py-1 text-xs font-semibold bg-orange-500/20 text-orange-300 rounded-full border border-orange-500/30">
+                    Free 60-Day Listings
+                  </span>
+                </div>
+                
+                <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-2">
+                  Alaska's Premier Private Listings Marketplace
+                </h3>
+                
+                <p className="text-sm md:text-base text-slate-300 mb-4 max-w-lg">
+                  List anything in <span className="text-cyan-400 font-semibold">every region of Alaska</span> completely free during our beta launch. 
+                  From Kenai to Fairbanks, your listings reach all of Alaska.
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
+                  <motion.a 
+                    href="https://aklistings.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-cyan-400 text-slate-900 font-bold text-sm hover:shadow-lg hover:shadow-cyan-500/30 transition-all"
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Start Listing Free
+                    <ExternalLink className="h-4 w-4" />
+                  </motion.a>
+                  <span className="text-xs text-slate-400">
+                    aklistings.com • No credit card required
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Main Footer Grid - Simplified */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 mb-10">
           {/* Brand Column */}
-          <div className="lg:col-span-2">
+          <div>
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -63,7 +152,7 @@ export function Footer() {
 
             {/* Contact Info - Email Only */}
             <motion.div 
-              className="space-y-2 text-xs text-primary-foreground/60"
+              className="text-xs text-primary-foreground/60"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -79,69 +168,25 @@ export function Footer() {
             </motion.div>
           </div>
 
-          {/* News Links */}
+          {/* Email Alerts */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-          >
-            <h4 className="font-display font-bold text-sm mb-4 text-primary-foreground">News</h4>
-            <ul className="space-y-2">
-              {newsCategories.map((link) => (
-                <li key={link}>
-                  <a href="#news" className="text-xs text-primary-foreground/60 hover:text-gold transition-colors">
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Regional Sites */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
           >
             <h4 className="font-display font-bold text-sm mb-4 text-primary-foreground flex items-center gap-2">
-              <Globe className="h-4 w-4 text-gold" />
-              Regional News
+              <Bell className="h-4 w-4 text-gold" />
+              Email Alerts
             </h4>
-            <ul className="space-y-2">
-              {regionalSites.map((site) => (
-                <li key={site.name}>
-                  <a 
-                    href={site.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-xs text-primary-foreground/60 hover:text-gold transition-colors flex items-center gap-1.5 group"
-                  >
-                    {site.name}
-                    <ExternalLink className="h-2.5 w-2.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Newsletter */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            <h4 className="font-display font-bold text-sm mb-4 text-primary-foreground">Stay Connected</h4>
             <p className="text-xs text-primary-foreground/60 mb-3">
-              Get Alaska news in your inbox.
+              Get breaking news and weather alerts delivered to your inbox.
             </p>
             <form className="space-y-2">
               <div className="relative">
                 <input
                   type="email"
                   placeholder="Your email"
-                  className="w-full px-3 py-2 rounded-lg bg-primary-foreground/5 border border-primary-foreground/10 text-primary-foreground placeholder:text-primary-foreground/30 text-xs focus:outline-none focus:ring-1 focus:ring-gold/50 transition-all"
+                  className="w-full px-3 py-2.5 rounded-lg bg-primary-foreground/5 border border-primary-foreground/10 text-primary-foreground placeholder:text-primary-foreground/30 text-xs focus:outline-none focus:ring-1 focus:ring-gold/50 transition-all"
                 />
                 <motion.button
                   type="submit"
@@ -152,73 +197,54 @@ export function Footer() {
                   <Send className="h-3 w-3" />
                 </motion.button>
               </div>
+              <p className="text-[10px] text-primary-foreground/40">
+                Unsubscribe anytime. No spam, ever.
+              </p>
             </form>
+          </motion.div>
 
-            {/* Social Links */}
-            <div className="flex items-center gap-2 mt-4">
-              {[Facebook, Twitter, Instagram, Youtube].map((Icon, index) => (
-                <motion.a 
-                  key={index}
-                  href="#" 
-                  className="p-2 rounded-lg bg-primary-foreground/5 text-primary-foreground/50 hover:bg-gold/20 hover:text-gold transition-all"
-                  whileHover={{ scale: 1.1 }}
-                >
-                  <Icon className="h-4 w-4" />
-                </motion.a>
-              ))}
+          {/* Get the App */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            <h4 className="font-display font-bold text-sm mb-4 text-primary-foreground">
+              Get the App
+            </h4>
+            <p className="text-xs text-primary-foreground/60 mb-4">
+              Stay connected with push notifications for breaking news and severe weather alerts.
+            </p>
+            <div className="flex flex-col gap-2">
+              <motion.a
+                href="#"
+                className="group flex items-center gap-3 px-4 py-2.5 bg-primary-foreground/5 hover:bg-primary-foreground/10 border border-primary-foreground/10 rounded-xl transition-all"
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Apple className="h-6 w-6 text-primary-foreground" />
+                <div className="text-left">
+                  <span className="block text-[10px] text-primary-foreground/60 leading-tight">Download on the</span>
+                  <span className="block text-sm font-semibold text-primary-foreground leading-tight">App Store</span>
+                </div>
+              </motion.a>
+              
+              <motion.a
+                href="#"
+                className="group flex items-center gap-3 px-4 py-2.5 bg-primary-foreground/5 hover:bg-primary-foreground/10 border border-primary-foreground/10 rounded-xl transition-all"
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <SiGoogleplay className="h-5 w-5 text-primary-foreground" />
+                <div className="text-left">
+                  <span className="block text-[10px] text-primary-foreground/60 leading-tight">Get it on</span>
+                  <span className="block text-sm font-semibold text-primary-foreground leading-tight">Google Play</span>
+                </div>
+              </motion.a>
             </div>
           </motion.div>
         </div>
-
-        {/* Alaska Listings Advertisement */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="relative p-5 rounded-xl overflow-hidden mb-8"
-        >
-          {/* Gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-r from-accent/15 via-aurora/10 to-gold/15" />
-          <div className="absolute inset-[1px] rounded-xl bg-gradient-midnight/80 backdrop-blur-sm" />
-          
-          <div className="relative flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <motion.div 
-                className="p-3 rounded-xl bg-gradient-to-br from-gold/30 to-accent/20"
-                animate={{ rotate: [0, 5, -5, 0] }}
-                transition={{ duration: 5, repeat: Infinity }}
-              >
-                <Mountain className="h-6 w-6 text-gold" />
-              </motion.div>
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <motion.span 
-                    className="px-2 py-0.5 text-xs font-bold bg-coral text-coral-foreground rounded-full"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    BETA
-                  </motion.span>
-                  <h4 className="font-display font-bold text-base text-primary-foreground">Alaska Listings</h4>
-                </div>
-                <p className="text-xs text-primary-foreground/70 max-w-md">
-                  Alaska's newest marketplace! <span className="text-gold font-semibold">FREE 60-day listing</span> during Beta.
-                </p>
-              </div>
-            </div>
-            <motion.a 
-              href="https://aklistings.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gradient-to-r from-gold to-gold/80 text-gold-foreground font-bold text-xs hover:shadow-lg transition-all"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              aklistings.com
-              <ExternalLink className="h-3 w-3" />
-            </motion.a>
-          </div>
-        </motion.div>
 
         {/* Bottom Bar */}
         <motion.div 
