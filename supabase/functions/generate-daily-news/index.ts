@@ -48,13 +48,13 @@ const categoryLinks: Record<string, { name: string; url: string; description: st
 };
 
 const categoryPrompts: Record<string, string> = {
-  local: `Generate a LOCAL news update for Kenai Peninsula. Topics: borough meetings, road conditions, school updates, local events, community services. Be WITTY and include dry Alaska humor.`,
-  outdoors: `Generate an OUTDOORS update for Kenai Peninsula. Topics: hiking trails, camping, kayaking, fishing spots. Be ADVENTUROUS with humor—joke about mosquitoes, "Alaska summer workout" (fighting bugs), etc.`,
-  wildlife: `Generate a WILDLIFE update for Kenai Peninsula. Topics: bear/moose/eagle sightings, migration, fishing reports. Use HUMOR—moose parking violations, bears judging your cooler contents, etc.`,
-  community: `Generate a COMMUNITY update for Kenai Peninsula. Topics: local heroes, events, volunteer opportunities, markets. Be WARM and FUNNY—celebrate the quirky small-town Alaska vibe.`,
-  weather: `Generate a WEATHER update for Kenai Peninsula. Include aurora forecast potential. Be WITTY—Alaskans' relationship with "the sun finally showing up," seasonal affective humor, etc.`,
-  business: `Generate a BUSINESS update for Kenai Peninsula. Topics: local business news, fishing industry, tourism. Include DRY HUMOR about Alaska entrepreneurship and seasonal economics.`,
-  sports: `Generate a SPORTS update for Kenai Peninsula. Topics: fishing derbies, high school sports, outdoor competitions. Be ENTHUSIASTIC with humor about "extreme Alaska sports" like driveway ice removal.`,
+  local: `Generate a LOCAL update for Kenai Peninsula. Topics: borough meetings, road conditions, school updates, local events, community services. Speak as a wise community elder sharing what neighbors need to know.`,
+  outdoors: `Generate an OUTDOORS update for Kenai Peninsula. Topics: hiking trails, camping, kayaking, fishing spots. Share the land's gifts with the reverence of someone who's spent a lifetime learning its rhythms.`,
+  wildlife: `Generate a WILDLIFE update for Kenai Peninsula. Topics: bear/moose/eagle sightings, migration, fishing reports. Speak of our wild neighbors with respect—they were here first, and we live alongside them.`,
+  community: `Generate a COMMUNITY update for Kenai Peninsula. Topics: local heroes, events, volunteer opportunities, markets. Celebrate the bonds that make small-town Alaska special.`,
+  weather: `Generate a WEATHER update for Kenai Peninsula. Include aurora forecast potential. Speak of weather as an old friend who sometimes tests us—preparation is how we show respect.`,
+  business: `Generate a BUSINESS update for Kenai Peninsula. Topics: local business news, fishing industry, tourism. Honor the entrepreneurial spirit that keeps our communities thriving.`,
+  sports: `Generate a SPORTS update for Kenai Peninsula. Topics: fishing derbies, high school sports, outdoor competitions. Celebrate our youth and the traditions that connect generations.`,
 };
 
 async function generateNewsContent(
@@ -74,13 +74,15 @@ async function generateNewsContent(
 
   const linksSection = linksToInclude.map(l => `- ${l.name}: ${l.url} (${l.description})`).join('\n');
 
-  const systemPrompt = `You are a witty, humorous Alaska news writer for Kenai News. Your style:
+  const systemPrompt = `You are a wise, seasoned Alaskan writer for Kenai News—an elder who embodies the old ways of the Alaskan spirit. Your style:
 
-- WITTY & HUMOROUS: Use dry Alaska humor, self-deprecating jokes about weather/wildlife, puns welcome
-- ADVENTUROUS: Celebrate the absurdity and beauty of Alaska life
-- SAFETY-FIRST: Sneak in practical safety tips with humor ("Pro tip: that moose has the right of way. Always.")
-- INFORMATIVE: Quick-hit information, not long-form journalism—think "here's what you need to know"
-- NEIGHBORLY: Like a funny friend texting you local updates
+- WISE & GROUNDED: You've seen decades of Alaska seasons. You speak with quiet confidence, not needing to prove your knowledge—it shows through your thoughtful observations.
+- TRANSCENDENT YET HUMBLE: You find meaning in the small moments. Self-deprecating when appropriate, but never diminishing. You've earned your perspective through lived experience.
+- SHEPHERDING: You see yourself as a steward of your community. You bring people along, advise them gently, and empower them with knowledge to lead safe, informed, successful lives.
+- CARING & INSIGHTFUL: Every piece should feel like counsel from a trusted neighbor who genuinely wants the best for you and your family.
+- EMPOWERING: You don't just inform—you equip Alaskans to make good decisions. Safety isn't a footnote; it's woven naturally into how you care for your community.
+
+You write like someone who's chopped wood in -40°, pulled salmon from the Kenai, and watched countless auroras—and wants to share that earned wisdom with the next generation.
 
 Reference real Kenai Peninsula locations: Soldotna, Homer, Seward, Kenai, Sterling, Cooper Landing, Nikiski, Clam Gulch, Ninilchik, Anchor Point, Kasilof.
 
@@ -103,15 +105,15 @@ Format links in the content as: [Link Text](URL)`;
         { role: 'system', content: systemPrompt },
         { role: 'user', content: `${categoryPrompts[category]}
 
-Generate a quick informational piece with:
-1. A punchy, clever HEADLINE (max 80 characters, wit appreciated)
-2. A brief EXCERPT (2-3 sentences, max 200 chars, hook the reader)
-3. CONTENT (200-350 words) that's informative, witty, and includes 1-2 working links from the provided list
+Generate a thoughtful informational piece with:
+1. A clear, meaningful HEADLINE (max 80 characters, speaks to the heart of the matter)
+2. A brief EXCERPT (2-3 sentences, max 200 chars, draws readers in with care)
+3. CONTENT (400-600 words) that informs, empowers, and includes 1-2 working links from the provided list
 
-Remember: This is a quick info piece, not a thesis. Be snappy. Be funny. Be useful.
+Remember: You are a trusted community voice. Speak with warmth, wisdom, and genuine care for your neighbors' wellbeing.
 
 IMPORTANT: Respond ONLY with valid JSON, no markdown code blocks:
-{"title": "Your witty headline", "excerpt": "Brief hook summary", "content": "Content with [Link Text](url) format links and \\n\\n paragraph breaks"}` }
+{"title": "Your thoughtful headline", "excerpt": "Brief meaningful summary", "content": "Content with [Link Text](url) format links and \\n\\n paragraph breaks"}` }
       ],
       temperature: 0.9,
     }),
