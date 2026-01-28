@@ -1,13 +1,12 @@
-import { Header } from "@/components/Header";
 import { NewsTicker } from "@/components/NewsTicker";
 import { LiveStats } from "@/components/LiveStats";
 import { SecondaryTicker, WeatherBand } from "@/components/SecondaryTicker";
 import { AlaskaQuoteBanner } from "@/components/AlaskaQuotes";
 import { AlertBanner } from "@/components/AlertBanner";
 import { HeroSection } from "@/components/HeroSection";
-import { RegionalUpdates } from "@/components/RegionalUpdates";
 import { NewsGrid } from "@/components/NewsGrid";
 import { Footer } from "@/components/Footer";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { motion } from "framer-motion";
 
 const Index = () => {
@@ -18,17 +17,14 @@ const Index = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Breaking News Ticker - Top priority */}
-      <NewsTicker />
-      
-      {/* Live Statistics Bar */}
+      {/* Live Statistics Bar - Top priority */}
       <LiveStats />
+      
+      {/* Breaking News Ticker */}
+      <NewsTicker />
 
       {/* Weather Band */}
       <WeatherBand />
-      
-      {/* Header */}
-      <Header />
 
       {/* Main Content */}
       <main className="flex-1">
@@ -46,15 +42,15 @@ const Index = () => {
           <AlertBanner />
         </section>
 
-        {/* Regional Updates - Interactive Map/Cards */}
-        <RegionalUpdates />
-
         {/* News Grid */}
         <NewsGrid />
       </main>
 
       {/* Footer */}
       <Footer />
+
+      {/* Floating Theme Toggle */}
+      <ThemeToggle />
     </motion.div>
   );
 };

@@ -3,7 +3,6 @@ import {
   Mail, Facebook, Twitter, Instagram, Youtube, 
   ExternalLink, Mountain, Heart, Send, Globe
 } from "lucide-react";
-import kenaiLogo from "@/assets/kenai-news-logo.jpg";
 
 const regionalSites = [
   { name: "Anchorage Chronicle", url: "https://anchoragechronicle.com" },
@@ -53,13 +52,9 @@ export function Footer() {
               viewport={{ once: true }}
               className="mb-6"
             >
-              <div className="mb-4">
-                <img 
-                  src={kenaiLogo} 
-                  alt="Kenai News" 
-                  className="h-12 w-auto object-contain brightness-110"
-                />
-              </div>
+              <h3 className="font-display font-bold text-xl text-primary-foreground mb-3">
+                Kenai News
+              </h3>
               <p className="text-xs text-primary-foreground/70 leading-relaxed max-w-sm">
                 Your trusted source for local news, weather, and community updates from 
                 Alaska's breathtaking Kenai Peninsula.
