@@ -38,8 +38,8 @@
     --aurora: 152 55% 28%;
     --aurora-foreground: 0 0% 100%;
 
-    /* Salmon Coral - Wild salmon */
-    --coral: 8 75% 55%;
+    /* Crimson Red - Alert accent */
+    --coral: 350 75% 50%;
     --coral-foreground: 0 0% 100%;
 
     /* Dark Gold - Midnight sun */
@@ -119,7 +119,7 @@
     --aurora: 220 15% 60%;
     --aurora-foreground: 0 0% 100%;
 
-    --coral: 8 80% 65%;
+    --coral: 350 75% 55%;
     --coral-foreground: 0 0% 100%;
 
     --gold: 38 80% 55%;
