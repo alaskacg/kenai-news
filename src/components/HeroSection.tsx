@@ -171,20 +171,6 @@ export function HeroSection() {
                 </p>
               </motion.div>
             )}
-
-            {/* Featured Stories Grid */}
-            {featuredArticles.length > 1 && (
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="grid grid-cols-2 gap-3 mt-6"
-              >
-                {featuredArticles.slice(1, 3).map((article, i) => (
-                  <HeroNewsCard key={article.id} article={article} index={i} variant="featured" />
-                ))}
-              </motion.div>
-            )}
           </div>
 
           {/* Right Column - Top Stories */}
