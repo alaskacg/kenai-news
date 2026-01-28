@@ -1,8 +1,8 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { Clock, ArrowRight, TrendingUp } from "lucide-react";
 import { useNewsArticles } from "@/hooks/useNews";
-import heroImage from "@/assets/hero-mountains.jpg";
-import { useRef } from "react";
+import heroImage from "@/assets/hero-kenai-community.jpg";
+import { useRef, useEffect, useState } from "react";
 import { HeroNewsCard } from "./HeroNewsCard";
 
 export function HeroSection() {
@@ -11,15 +11,38 @@ export function HeroSection() {
   const featuredArticles = articles?.filter((a) => a.is_featured).slice(0, 3) || [];
   const topStories = articles?.filter((a) => !a.is_breaking && !a.is_featured).slice(0, 4) || [];
   const sectionRef = useRef<HTMLElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"]
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
+  // Advanced parallax transforms
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.4]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const blur = useTransform(scrollYProgress, [0, 1], [0, 4]);
+  
+  // Mouse parallax effect
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springConfig = { stiffness: 50, damping: 20 };
+  const mouseXSpring = useSpring(mouseX, springConfig);
+  const mouseYSpring = useSpring(mouseY, springConfig);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      mouseX.set((clientX - innerWidth / 2) / 50);
+      mouseY.set((clientY - innerHeight / 2) / 50);
+      setMousePosition({ x: clientX / innerWidth, y: clientY / innerHeight });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
 
   const formatTime = (dateString: string) => {
     const date = new Date(dateString);
@@ -35,26 +58,89 @@ export function HeroSection() {
 
   return (
     <section ref={sectionRef} className="relative min-h-[70vh] flex flex-col overflow-hidden">
-      {/* Parallax Background */}
-      <motion.div className="absolute inset-0" style={{ y: imageY, scale }}>
-        <img
+      {/* Advanced Parallax Background with Mouse Tracking */}
+      <motion.div 
+        className="absolute inset-0" 
+        style={{ 
+          y: imageY, 
+          scale,
+          x: mouseXSpring,
+        }}
+      >
+        <motion.img
           src={heroImage}
-          alt="Kenai Peninsula"
+          alt="Kenai Peninsula Community"
           className="w-full h-full object-cover"
+          style={{ 
+            filter: `blur(${blur}px)`,
+          }}
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 2, ease: "easeOut" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/70 to-primary/30" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/40 to-transparent" />
+        
+        {/* Animated gradient overlays */}
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent"
+          animate={{
+            opacity: [0.7, 0.8, 0.7],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-r from-primary/70 via-transparent to-primary/30"
+          style={{
+            backgroundPosition: `${mousePosition.x * 100}% ${mousePosition.y * 100}%`,
+          }}
+        />
+        
+        {/* Floating light particles effect */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-primary-foreground/20 rounded-full"
+              style={{
+                left: `${15 + i * 15}%`,
+                top: `${20 + (i % 3) * 25}%`,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                opacity: [0.2, 0.5, 0.2],
+                scale: [1, 1.5, 1],
+              }}
+              transition={{
+                duration: 4 + i,
+                repeat: Infinity,
+                delay: i * 0.5,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+        
+        {/* Subtle vignette */}
+        <div className="absolute inset-0 bg-radial-gradient pointer-events-none" 
+          style={{
+            background: "radial-gradient(ellipse at center, transparent 40%, hsl(var(--primary) / 0.4) 100%)"
+          }}
+        />
+        
         <div className="absolute inset-0 noise-overlay" />
       </motion.div>
 
-      {/* Animated Title - Top Center */}
+      {/* Animated Title - Top Center - Reduced Size */}
       <motion.div 
-        className="relative z-10 flex justify-center pt-8 md:pt-12"
+        className="relative z-10 flex justify-center pt-6 md:pt-10"
         animate={{
           textShadow: [
-            "0 0 20px rgba(100, 150, 200, 0.3)",
-            "0 0 40px rgba(100, 150, 200, 0.5)",
-            "0 0 20px rgba(100, 150, 200, 0.3)",
+            "0 0 15px rgba(100, 150, 200, 0.2)",
+            "0 0 30px rgba(100, 150, 200, 0.4)",
+            "0 0 15px rgba(100, 150, 200, 0.2)",
           ],
         }}
         transition={{
@@ -63,22 +149,22 @@ export function HeroSection() {
           ease: "easeInOut",
         }}
       >
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary-foreground tracking-tight flex overflow-hidden perspective-1000">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-primary-foreground tracking-tight flex overflow-hidden perspective-1000">
           {titleText.split("").map((letter, i) => (
             <motion.span
               key={i}
-              initial={{ opacity: 0, y: 50, rotateX: -90 }}
+              initial={{ opacity: 0, y: 30, rotateX: -90 }}
               animate={{ opacity: 1, y: 0, rotateX: 0 }}
               transition={{
-                delay: i * 0.08,
-                duration: 0.6,
+                delay: i * 0.06,
+                duration: 0.5,
                 ease: "easeOut",
               }}
-              className={`inline-block ${letter === " " ? "w-3 md:w-4" : ""} hover:text-accent transition-colors duration-300`}
+              className={`inline-block ${letter === " " ? "w-2 md:w-3" : ""} hover:text-accent transition-colors duration-300`}
               style={{ transformStyle: "preserve-3d" }}
               whileHover={{ 
-                scale: 1.2, 
-                y: -5,
+                scale: 1.15, 
+                y: -3,
                 color: "hsl(var(--accent))",
                 transition: { duration: 0.2 } 
               }}
