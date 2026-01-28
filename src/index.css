@@ -1,136 +1,161 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Bebas+Neue&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Kenai Peninsula News - Alaskan-inspired design system */
+/* Kenai Peninsula News - Rugged Alaska Design System */
 
 @layer base {
   :root {
-    /* Core colors - Alaskan wilderness palette */
-    --background: 210 25% 97%;
-    --foreground: 215 35% 12%;
+    /* Core colors - Rugged Alaska Palette */
+    --background: 210 15% 96%;
+    --foreground: 220 25% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 35% 12%;
+    --card-foreground: 220 25% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 35% 12%;
+    --popover-foreground: 220 25% 10%;
 
-    /* Midnight navy - deep Alaskan night */
-    --primary: 215 45% 18%;
-    --primary-foreground: 210 25% 97%;
+    /* Slate/Charcoal - Alaska mountains */
+    --primary: 220 20% 14%;
+    --primary-foreground: 210 15% 96%;
 
-    /* Glacier teal */
-    --secondary: 190 45% 85%;
-    --secondary-foreground: 215 45% 18%;
+    /* Steel Blue - Glacier ice */
+    --secondary: 210 30% 85%;
+    --secondary-foreground: 220 20% 14%;
 
-    /* Forest muted */
-    --muted: 160 15% 92%;
-    --muted-foreground: 215 20% 45%;
+    /* Muted forest tones */
+    --muted: 150 10% 90%;
+    --muted-foreground: 220 15% 40%;
 
-    /* Glacier accent */
-    --accent: 190 60% 45%;
+    /* Hunter Green - Spruce forests */
+    --accent: 152 45% 28%;
     --accent-foreground: 0 0% 100%;
 
-    /* Aurora glow */
-    --aurora: 160 70% 45%;
+    /* Aurora Green - Northern lights */
+    --aurora: 158 65% 42%;
     --aurora-foreground: 0 0% 100%;
 
-    /* Salmon coral */
-    --coral: 15 85% 60%;
+    /* Salmon Coral - Wild salmon */
+    --coral: 8 75% 55%;
     --coral-foreground: 0 0% 100%;
 
+    /* Dark Gold - Midnight sun */
+    --gold: 38 70% 42%;
+    --gold-foreground: 0 0% 100%;
+
+    /* Deep Crimson - Alaska flag star */
+    --crimson: 350 70% 40%;
+    --crimson-foreground: 0 0% 100%;
+
+    /* Steel Blue accent */
+    --steel: 210 45% 45%;
+    --steel-foreground: 0 0% 100%;
+
     /* Alert colors */
-    --destructive: 0 72% 51%;
+    --destructive: 350 70% 45%;
     --destructive-foreground: 0 0% 100%;
     
     --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 100%;
+    --warning-foreground: 220 20% 14%;
 
-    --success: 142 71% 45%;
+    --success: 152 45% 35%;
     --success-foreground: 0 0% 100%;
 
-    --border: 215 20% 88%;
-    --input: 215 20% 88%;
-    --ring: 190 60% 45%;
+    --border: 220 15% 85%;
+    --input: 220 15% 85%;
+    --ring: 152 45% 28%;
 
     --radius: 0.75rem;
 
     /* Custom gradients */
-    --gradient-aurora: linear-gradient(135deg, hsl(190 60% 45%), hsl(160 70% 45%), hsl(280 60% 50%));
-    --gradient-midnight: linear-gradient(180deg, hsl(215 45% 12%), hsl(215 45% 22%));
-    --gradient-glacier: linear-gradient(135deg, hsl(190 45% 85%), hsl(200 50% 92%));
-    --gradient-sunset: linear-gradient(135deg, hsl(15 85% 60%), hsl(35 90% 55%));
+    --gradient-aurora: linear-gradient(135deg, hsl(158 65% 42%), hsl(180 50% 35%), hsl(210 45% 45%));
+    --gradient-midnight: linear-gradient(180deg, hsl(220 20% 8%), hsl(220 20% 18%));
+    --gradient-mountain: linear-gradient(135deg, hsl(220 20% 14%), hsl(210 25% 22%), hsl(200 30% 28%));
+    --gradient-sunset: linear-gradient(135deg, hsl(38 70% 42%), hsl(20 80% 50%), hsl(350 70% 45%));
+    --gradient-forest: linear-gradient(135deg, hsl(152 45% 20%), hsl(158 65% 30%), hsl(152 45% 28%));
+    --gradient-glacier: linear-gradient(135deg, hsl(200 40% 85%), hsl(210 45% 75%), hsl(190 35% 80%));
 
     /* Glass effect */
-    --glass-bg: hsla(0, 0%, 100%, 0.7);
-    --glass-border: hsla(215, 20%, 88%, 0.5);
+    --glass-bg: hsla(0, 0%, 100%, 0.75);
+    --glass-border: hsla(220, 15%, 85%, 0.6);
+    --glass-dark: hsla(220, 20%, 14%, 0.85);
 
     /* Sidebar */
-    --sidebar-background: 215 45% 18%;
-    --sidebar-foreground: 210 25% 97%;
-    --sidebar-primary: 190 60% 45%;
+    --sidebar-background: 220 20% 12%;
+    --sidebar-foreground: 210 15% 96%;
+    --sidebar-primary: 152 45% 35%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 40% 25%;
-    --sidebar-accent-foreground: 210 25% 97%;
-    --sidebar-border: 215 35% 28%;
-    --sidebar-ring: 190 60% 45%;
+    --sidebar-accent: 220 18% 20%;
+    --sidebar-accent-foreground: 210 15% 96%;
+    --sidebar-border: 220 15% 25%;
+    --sidebar-ring: 152 45% 35%;
   }
 
   .dark {
-    --background: 215 45% 8%;
-    --foreground: 210 25% 95%;
+    --background: 220 20% 6%;
+    --foreground: 210 20% 95%;
 
-    --card: 215 40% 12%;
-    --card-foreground: 210 25% 95%;
+    --card: 220 18% 10%;
+    --card-foreground: 210 20% 95%;
 
-    --popover: 215 40% 12%;
-    --popover-foreground: 210 25% 95%;
+    --popover: 220 18% 10%;
+    --popover-foreground: 210 20% 95%;
 
-    --primary: 190 60% 55%;
-    --primary-foreground: 215 45% 8%;
+    --primary: 158 55% 50%;
+    --primary-foreground: 220 20% 6%;
 
-    --secondary: 215 35% 20%;
-    --secondary-foreground: 210 25% 95%;
+    --secondary: 220 15% 18%;
+    --secondary-foreground: 210 20% 95%;
 
-    --muted: 215 35% 18%;
-    --muted-foreground: 215 15% 60%;
+    --muted: 220 15% 15%;
+    --muted-foreground: 220 10% 55%;
 
-    --accent: 160 70% 50%;
-    --accent-foreground: 215 45% 8%;
+    --accent: 158 60% 45%;
+    --accent-foreground: 220 20% 6%;
 
-    --aurora: 160 75% 55%;
-    --aurora-foreground: 215 45% 8%;
+    --aurora: 158 70% 55%;
+    --aurora-foreground: 220 20% 6%;
 
-    --coral: 15 85% 65%;
-    --coral-foreground: 215 45% 8%;
+    --coral: 8 80% 60%;
+    --coral-foreground: 220 20% 6%;
 
-    --destructive: 0 62% 45%;
+    --gold: 38 75% 50%;
+    --gold-foreground: 220 20% 6%;
+
+    --crimson: 350 65% 50%;
+    --crimson-foreground: 0 0% 100%;
+
+    --steel: 210 50% 55%;
+    --steel-foreground: 220 20% 6%;
+
+    --destructive: 350 60% 45%;
     --destructive-foreground: 0 0% 100%;
 
-    --warning: 38 90% 55%;
-    --warning-foreground: 215 45% 8%;
+    --warning: 38 85% 55%;
+    --warning-foreground: 220 20% 6%;
 
-    --success: 142 65% 50%;
-    --success-foreground: 215 45% 8%;
+    --success: 152 50% 45%;
+    --success-foreground: 220 20% 6%;
 
-    --border: 215 30% 22%;
-    --input: 215 30% 22%;
-    --ring: 190 60% 55%;
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 158 55% 50%;
 
-    --glass-bg: hsla(215, 40%, 12%, 0.8);
-    --glass-border: hsla(215, 30%, 30%, 0.5);
+    --glass-bg: hsla(220, 18%, 10%, 0.85);
+    --glass-border: hsla(220, 15%, 25%, 0.6);
+    --glass-dark: hsla(220, 20%, 6%, 0.9);
 
-    --sidebar-background: 215 45% 6%;
-    --sidebar-foreground: 210 25% 95%;
-    --sidebar-primary: 190 60% 55%;
-    --sidebar-primary-foreground: 215 45% 8%;
-    --sidebar-accent: 215 40% 15%;
-    --sidebar-accent-foreground: 210 25% 95%;
-    --sidebar-border: 215 35% 20%;
-    --sidebar-ring: 190 60% 55%;
+    --sidebar-background: 220 20% 5%;
+    --sidebar-foreground: 210 20% 95%;
+    --sidebar-primary: 158 55% 50%;
+    --sidebar-primary-foreground: 220 20% 6%;
+    --sidebar-accent: 220 15% 12%;
+    --sidebar-accent-foreground: 210 20% 95%;
+    --sidebar-border: 220 15% 18%;
+    --sidebar-ring: 158 55% 50%;
   }
 }
 
@@ -153,16 +178,23 @@
   /* Glass morphism */
   .glass {
     background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
   }
 
   .glass-strong {
     background: var(--glass-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--glass-border);
+  }
+
+  .glass-dark {
+    background: var(--glass-dark);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
+    border: 1px solid hsla(220, 15%, 30%, 0.4);
   }
 
   /* Gradient backgrounds */
@@ -174,12 +206,20 @@
     background: var(--gradient-midnight);
   }
 
-  .bg-gradient-glacier {
-    background: var(--gradient-glacier);
+  .bg-gradient-mountain {
+    background: var(--gradient-mountain);
   }
 
   .bg-gradient-sunset {
     background: var(--gradient-sunset);
+  }
+
+  .bg-gradient-forest {
+    background: var(--gradient-forest);
+  }
+
+  .bg-gradient-glacier {
+    background: var(--gradient-glacier);
   }
 
   /* Text gradients */
@@ -190,16 +230,38 @@
     background-clip: text;
   }
 
+  .text-gradient-sunset {
+    background: var(--gradient-sunset);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, hsl(38 70% 50%), hsl(45 80% 60%), hsl(38 70% 45%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   /* Glow effects */
   .glow-aurora {
-    box-shadow: 0 0 40px -10px hsl(160 70% 45% / 0.5);
+    box-shadow: 0 0 50px -15px hsl(158 65% 42% / 0.5);
   }
 
   .glow-accent {
-    box-shadow: 0 0 30px -8px hsl(190 60% 45% / 0.4);
+    box-shadow: 0 0 40px -10px hsl(152 45% 28% / 0.5);
   }
 
-  /* Smooth scrolling ticker */
+  .glow-gold {
+    box-shadow: 0 0 40px -10px hsl(38 70% 42% / 0.5);
+  }
+
+  .glow-crimson {
+    box-shadow: 0 0 40px -10px hsl(350 70% 40% / 0.5);
+  }
+
+  /* Smooth scrolling ticker - Primary */
   @keyframes ticker-scroll {
     0% {
       transform: translateX(0);
@@ -210,16 +272,37 @@
   }
 
   .animate-ticker {
-    animation: ticker-scroll 30s linear infinite;
+    animation: ticker-scroll 35s linear infinite;
+  }
+
+  /* Reverse ticker for secondary */
+  @keyframes ticker-scroll-reverse {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .animate-ticker-reverse {
+    animation: ticker-scroll-reverse 40s linear infinite;
+  }
+
+  /* Slow ticker for quotes */
+  .animate-ticker-slow {
+    animation: ticker-scroll 60s linear infinite;
   }
 
   /* Pulse animation for alerts */
   @keyframes pulse-glow {
     0%, 100% {
       opacity: 1;
+      box-shadow: 0 0 20px -5px currentColor;
     }
     50% {
-      opacity: 0.7;
+      opacity: 0.8;
+      box-shadow: 0 0 30px -5px currentColor;
     }
   }
 
@@ -245,18 +328,166 @@
     animation: aurora-shimmer 8s ease infinite;
   }
 
+  /* Float animation */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  /* Slide in animations */
+  @keyframes slide-in-left {
+    0% {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-in-left {
+    animation: slide-in-left 0.6s ease-out;
+  }
+
+  .animate-slide-in-up {
+    animation: slide-in-up 0.6s ease-out;
+  }
+
+  /* Stagger children */
+  .stagger-children > * {
+    opacity: 0;
+    animation: slide-in-up 0.5s ease-out forwards;
+  }
+
+  .stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+  .stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+  .stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
+
+  /* Breathing animation */
+  @keyframes breathe {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
+  }
+
+  .animate-breathe {
+    animation: breathe 5s ease-in-out infinite;
+  }
+
+  /* Typewriter cursor */
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  .animate-cursor {
+    animation: blink 1s step-end infinite;
+  }
+
+  /* Rotate */
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+
   /* Hover lift effect */
   .hover-lift {
-    @apply transition-all duration-300;
+    @apply transition-all duration-500 ease-out;
   }
 
   .hover-lift:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px -20px hsl(220 20% 14% / 0.25);
+  }
+
+  /* Card hover */
+  .card-hover {
+    @apply transition-all duration-500 ease-out;
+  }
+
+  .card-hover:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 40px -15px hsl(215 45% 18% / 0.2);
+    box-shadow: 0 20px 40px -15px hsl(220 20% 14% / 0.2);
   }
 
   /* Focus ring */
   .focus-ring {
     @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background;
   }
+
+  /* Noise texture overlay */
+  .noise-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+
+  /* Mountain silhouette divider */
+  .mountain-divider {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='%23f5f7f9' d='M0,64 L80,58 L160,70 L240,50 L320,80 L400,45 L480,75 L560,35 L640,65 L720,40 L800,85 L880,30 L960,60 L1040,45 L1120,75 L1200,35 L1280,70 L1360,50 L1440,60 L1440,120 L0,120 Z'/%3E%3C/svg%3E");
+    background-size: cover;
+    background-position: bottom;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(220 15% 90%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(220 20% 60%);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(220 20% 50%);
+}
+
+/* Selection */
+::selection {
+  background: hsl(152 45% 28% / 0.3);
+  color: hsl(220 25% 10%);
 }
