@@ -211,101 +211,71 @@ export function ExpandableNewsCard({ article, variant = "default", index = 0 }: 
     return (
       <Collapsible open={isExpanded} onOpenChange={setIsExpanded}>
         <motion.article
-          className="relative overflow-hidden rounded-xl group border border-border/50"
-          initial={{ opacity: 0, y: 20 }}
+          className="relative overflow-hidden rounded-lg group border border-border/50"
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.25 }}
         >
-          {/* Image */}
-          <div className="relative h-48 md:h-56 overflow-hidden">
+          {/* Image - More compact */}
+          <div className="relative h-36 md:h-44 overflow-hidden">
             <motion.img
               src={imageUrl}
               alt={article.title}
               className="w-full h-full object-cover"
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.5 }}
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.4 }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/50 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/50 to-transparent" />
             
             {article.is_breaking && (
               <motion.div 
-                className="absolute top-4 left-4"
-                animate={{ scale: [1, 1.03, 1] }}
+                className="absolute top-2 left-2"
+                animate={{ scale: [1, 1.02, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                <span className="px-3 py-1 bg-coral text-coral-foreground font-bold text-xs uppercase tracking-wide rounded-md">
+                <span className="px-2 py-0.5 bg-coral text-coral-foreground font-bold text-[10px] uppercase tracking-wide rounded">
                   🔴 Breaking
                 </span>
               </motion.div>
             )}
 
-            <div className="absolute top-4 right-4">
-              <span className={`px-2 py-1 rounded-md text-xs font-semibold capitalize border backdrop-blur-sm ${categoryColors[article.category]}`}>
+            <div className="absolute top-2 right-2">
+              <span className={`px-1.5 py-0.5 rounded text-[10px] font-semibold capitalize border backdrop-blur-sm ${categoryColors[article.category]}`}>
                 {article.category}
               </span>
             </div>
 
-            {/* Content */}
-            <div className="absolute bottom-0 left-0 right-0 p-4">
-              <h2 className="text-lg md:text-xl font-display font-bold text-primary-foreground mb-1.5 leading-tight">
+            {/* Content overlay */}
+            <div className="absolute bottom-0 left-0 right-0 p-3">
+              <h2 className="text-sm md:text-base font-display font-bold text-primary-foreground mb-1 leading-tight line-clamp-2">
                 {article.title}
               </h2>
-              <p className="text-primary-foreground/75 text-xs mb-3 line-clamp-2 max-w-lg">
+              <p className="text-primary-foreground/70 text-[10px] mb-2 line-clamp-1 max-w-md">
                 {article.excerpt}
               </p>
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3 text-primary-foreground/60 text-xs">
+                <div className="flex items-center gap-2 text-primary-foreground/50 text-[10px]">
                   <span className="flex items-center gap-1">
-                    <Clock className="h-3 w-3" />
+                    <Clock className="h-2.5 w-2.5" />
                     {formatTime(article.published_at)}
                   </span>
-                  {article.author && (
-                    <>
-                      <span className="w-1 h-1 rounded-full bg-primary-foreground/40" />
-                      <span className="flex items-center gap-1">
-                        <User className="h-3 w-3" />
-                        {article.author}
-                      </span>
-                    </>
-                  )}
                 </div>
-                <div className="flex items-center gap-2">
-                  <motion.button 
-                    className="p-2 rounded-lg bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 transition-colors"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
+                <CollapsibleTrigger asChild>
+                  <motion.button
+                    className="flex items-center gap-1 px-2.5 py-1 bg-accent text-accent-foreground rounded text-[10px] font-semibold"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <BookmarkPlus className="h-3.5 w-3.5" />
+                    {isExpanded ? "Less" : "Read More"}
+                    <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                      <ChevronDown className="h-2.5 w-2.5" />
+                    </motion.div>
                   </motion.button>
-                  <motion.button 
-                    className="p-2 rounded-lg bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 transition-colors"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Share2 className="h-3.5 w-3.5" />
-                  </motion.button>
-                  <CollapsibleTrigger asChild>
-                    <motion.button
-                      className="flex items-center gap-1.5 px-4 py-2 bg-accent text-accent-foreground rounded-lg font-semibold text-xs"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      {isExpanded ? "Show Less" : "Read Full Story"}
-                      <motion.div
-                        animate={{ rotate: isExpanded ? 180 : 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <ChevronDown className="h-3 w-3" />
-                      </motion.div>
-                    </motion.button>
-                  </CollapsibleTrigger>
-                </div>
+                </CollapsibleTrigger>
               </div>
             </div>
           </div>
-
           {/* Expanded Content */}
           <CollapsibleContent>
             <AnimatePresence>
@@ -314,13 +284,11 @@ export function ExpandableNewsCard({ article, variant = "default", index = 0 }: 
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="bg-card p-6 border-t border-border"
+                  className="bg-card p-4 border-t border-border"
                 >
-                  <div className="prose prose-sm max-w-none">
-                    <p className="text-foreground/80 leading-relaxed whitespace-pre-line text-sm">
-                      {fullContent}
-                    </p>
-                  </div>
+                  <p className="text-foreground/80 leading-relaxed whitespace-pre-line text-xs">
+                    {fullContent}
+                  </p>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -330,37 +298,37 @@ export function ExpandableNewsCard({ article, variant = "default", index = 0 }: 
     );
   }
 
-  // Default card
+  // Default card - ultra compact
   return (
     <Collapsible open={isExpanded} onOpenChange={setIsExpanded}>
       <motion.article
-        className="group bg-card rounded-lg overflow-hidden border border-border hover:border-accent/40 transition-all duration-300 shadow-sm"
-        initial={{ opacity: 0, y: 15 }}
+        className="group bg-card rounded overflow-hidden border border-border hover:border-accent/40 transition-all duration-200 shadow-sm"
+        initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ delay: index * 0.05 }}
+        transition={{ delay: index * 0.03 }}
       >
-        {/* Image */}
-        <div className="relative h-28 overflow-hidden">
+        {/* Image - smaller */}
+        <div className="relative h-20 overflow-hidden">
           <motion.img
             src={imageUrl}
             alt={article.title}
             className="w-full h-full object-cover"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.4 }}
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.3 }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-60" />
           
-          <div className="absolute top-2 left-2">
-            <span className={`px-2 py-0.5 rounded text-xs font-semibold capitalize border backdrop-blur-sm ${categoryColors[article.category]}`}>
+          <div className="absolute top-1.5 left-1.5">
+            <span className={`px-1.5 py-0.5 rounded text-[9px] font-semibold capitalize border backdrop-blur-sm ${categoryColors[article.category]}`}>
               {article.category}
             </span>
           </div>
 
           {article.is_breaking && (
             <motion.span 
-              className="absolute top-2 right-2 px-2 py-0.5 bg-coral text-coral-foreground font-bold text-xs rounded"
-              animate={{ scale: [1, 1.05, 1] }}
+              className="absolute top-1.5 right-1.5 px-1.5 py-0.5 bg-coral text-coral-foreground font-bold text-[8px] rounded"
+              animate={{ scale: [1, 1.03, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
               Breaking
@@ -368,30 +336,27 @@ export function ExpandableNewsCard({ article, variant = "default", index = 0 }: 
           )}
         </div>
 
-        {/* Content */}
-        <div className="p-3">
-          <h3 className="font-display font-bold text-xs text-card-foreground group-hover:text-accent transition-colors line-clamp-2 leading-snug mb-1.5">
+        {/* Content - condensed */}
+        <div className="p-2">
+          <h3 className="font-display font-bold text-[11px] text-card-foreground group-hover:text-accent transition-colors line-clamp-2 leading-tight mb-1">
             {article.title}
           </h3>
-          <p className="text-muted-foreground text-[11px] line-clamp-2 mb-2">
+          <p className="text-muted-foreground text-[9px] line-clamp-1 mb-1.5">
             {article.excerpt}
           </p>
-          <div className="flex items-center justify-between text-[10px] text-muted-foreground">
+          <div className="flex items-center justify-between text-[9px] text-muted-foreground">
             <div className="flex items-center gap-1">
-              <Clock className="h-3 w-3" />
+              <Clock className="h-2.5 w-2.5" />
               <span>{formatTime(article.published_at)}</span>
             </div>
             <CollapsibleTrigger asChild>
               <motion.button 
-                className="flex items-center gap-1 text-accent font-medium hover:underline"
-                whileHover={{ x: 2 }}
+                className="flex items-center gap-0.5 text-accent font-medium hover:underline"
+                whileHover={{ x: 1 }}
               >
-                {isExpanded ? "Less" : "Expand"}
-                <motion.div
-                  animate={{ rotate: isExpanded ? 180 : 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <ChevronDown className="h-3 w-3" />
+                {isExpanded ? "Less" : "More"}
+                <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.15 }}>
+                  <ChevronDown className="h-2.5 w-2.5" />
                 </motion.div>
               </motion.button>
             </CollapsibleTrigger>

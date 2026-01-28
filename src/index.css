@@ -42,8 +42,8 @@
     --coral: 350 75% 50%;
     --coral-foreground: 0 0% 100%;
 
-    /* Dark Gold - Midnight sun */
-    --gold: 38 70% 42%;
+    /* Glacier Blue - Ice accent (replacing gold) */
+    --gold: 200 50% 45%;
     --gold-foreground: 0 0% 100%;
 
     /* Deep Crimson - Alaska flag star */
@@ -58,7 +58,7 @@
     --destructive: 350 70% 45%;
     --destructive-foreground: 0 0% 100%;
     
-    --warning: 38 92% 50%;
+    --warning: 45 93% 47%;
     --warning-foreground: 220 20% 14%;
 
     --success: 152 45% 35%;
@@ -74,7 +74,7 @@
     --gradient-aurora: linear-gradient(135deg, hsl(158 65% 42%), hsl(180 50% 35%), hsl(210 45% 45%));
     --gradient-midnight: linear-gradient(180deg, hsl(220 20% 8%), hsl(220 20% 18%));
     --gradient-mountain: linear-gradient(135deg, hsl(220 20% 14%), hsl(210 25% 22%), hsl(200 30% 28%));
-    --gradient-sunset: linear-gradient(135deg, hsl(38 70% 42%), hsl(20 80% 50%), hsl(350 70% 45%));
+    --gradient-sunset: linear-gradient(135deg, hsl(200 50% 45%), hsl(210 55% 50%), hsl(350 70% 45%));
     --gradient-forest: linear-gradient(135deg, hsl(150 50% 12%), hsl(152 55% 22%), hsl(150 50% 18%));
     --gradient-glacier: linear-gradient(135deg, hsl(200 40% 85%), hsl(210 45% 75%), hsl(190 35% 80%));
 
@@ -122,7 +122,7 @@
     --coral: 350 75% 55%;
     --coral-foreground: 0 0% 100%;
 
-    --gold: 38 80% 55%;
+    --gold: 200 45% 55%;
     --gold-foreground: 220 20% 8%;
 
     --crimson: 350 65% 55%;
