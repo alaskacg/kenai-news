@@ -1,7 +1,14 @@
 import { motion } from "framer-motion";
 import { Clock, ArrowUpRight, BookmarkPlus, Share2 } from "lucide-react";
 import type { NewsArticle } from "@/hooks/useNews";
-import salmonImage from "@/assets/salmon-run.jpg";
+
+// Import unique images
+import wildlifeBear from "@/assets/wildlife-bear.jpg";
+import wildlifeMoose from "@/assets/wildlife-moose.jpg";
+import wildlifeEagle from "@/assets/wildlife-eagle.jpg";
+import fishingBoat from "@/assets/fishing-boat.jpg";
+import communityGathering from "@/assets/community-gathering.jpg";
+import outdoorsKayak from "@/assets/outdoors-kayak.jpg";
 
 interface NewsCardProps {
   article: NewsArticle;
@@ -19,6 +26,21 @@ const categoryColors: Record<string, string> = {
   sports: "bg-primary/20 text-primary border-primary/30",
 };
 
+// Unique images per category and index
+const getUniqueImage = (category: string, index: number): string => {
+  const categoryImages: Record<string, string[]> = {
+    wildlife: [wildlifeBear, wildlifeMoose, wildlifeEagle],
+    outdoors: [outdoorsKayak, wildlifeMoose, fishingBoat],
+    local: [fishingBoat, communityGathering, wildlifeEagle],
+    community: [communityGathering, fishingBoat, wildlifeMoose],
+    weather: [outdoorsKayak, wildlifeEagle, communityGathering],
+    business: [fishingBoat, communityGathering, wildlifeBear],
+    sports: [wildlifeEagle, outdoorsKayak, wildlifeBear],
+  };
+  const images = categoryImages[category] || [fishingBoat, wildlifeBear, outdoorsKayak];
+  return images[index % images.length];
+};
+
 export function NewsCard({ article, variant = "default", index = 0 }: NewsCardProps) {
   const formatTime = (dateString: string) => {
     const date = new Date(dateString);
@@ -31,31 +53,33 @@ export function NewsCard({ article, variant = "default", index = 0 }: NewsCardPr
     return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
   };
 
+  const imageUrl = article.image_url || getUniqueImage(article.category, index);
+
   if (variant === "compact") {
     return (
       <motion.article
-        className="flex items-start gap-4 p-4 hover:bg-muted/50 transition-colors cursor-pointer group"
-        whileHover={{ x: 4 }}
-        initial={{ opacity: 0, x: -10 }}
+        className="flex items-start gap-3 p-3 hover:bg-muted/50 transition-colors cursor-pointer group"
+        whileHover={{ x: 3 }}
+        initial={{ opacity: 0, x: -8 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
-        transition={{ delay: index * 0.05 }}
+        transition={{ delay: index * 0.04 }}
       >
-        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-accent/20 to-aurora/20 flex items-center justify-center text-sm font-bold text-accent">
+        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-accent/20 to-aurora/20 flex items-center justify-center text-xs font-bold text-accent">
           {index + 1}
         </div>
         <div className="flex-1 min-w-0">
-          <h4 className="font-semibold text-sm text-card-foreground group-hover:text-accent transition-colors line-clamp-2 leading-snug">
+          <h4 className="font-semibold text-xs text-card-foreground group-hover:text-accent transition-colors line-clamp-2 leading-snug">
             {article.title}
           </h4>
-          <div className="flex items-center gap-2 mt-2 text-xs text-muted-foreground">
-            <Clock className="h-3 w-3" />
+          <div className="flex items-center gap-1.5 mt-1.5 text-xs text-muted-foreground">
+            <Clock className="h-2.5 w-2.5" />
             <span>{formatTime(article.published_at)}</span>
-            <span className="w-1 h-1 rounded-full bg-muted-foreground/50" />
+            <span className="w-0.5 h-0.5 rounded-full bg-muted-foreground/50" />
             <span className="capitalize">{article.category}</span>
           </div>
         </div>
-        <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors opacity-0 group-hover:opacity-100" />
+        <ArrowUpRight className="h-3 w-3 text-muted-foreground group-hover:text-accent transition-colors opacity-0 group-hover:opacity-100" />
       </motion.article>
     );
   }
@@ -63,101 +87,80 @@ export function NewsCard({ article, variant = "default", index = 0 }: NewsCardPr
   if (variant === "featured") {
     return (
       <motion.article
-        className="relative overflow-hidden rounded-2xl group cursor-pointer"
-        initial={{ opacity: 0, y: 30 }}
+        className="relative overflow-hidden rounded-xl group cursor-pointer border border-border/50"
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        whileHover={{ y: -5 }}
-        transition={{ duration: 0.4 }}
+        whileHover={{ y: -3 }}
+        transition={{ duration: 0.3 }}
       >
-        {/* Image with parallax effect */}
-        <div className="relative h-[400px] md:h-[450px] overflow-hidden">
+        {/* Image */}
+        <div className="relative h-64 md:h-72 overflow-hidden">
           <motion.img
-            src={article.image_url || salmonImage}
+            src={imageUrl}
             alt={article.title}
             className="w-full h-full object-cover"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.6 }}
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.5 }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/50 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/60 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/50 via-transparent to-transparent" />
           
-          {/* Breaking badge */}
           {article.is_breaking && (
             <motion.div 
-              className="absolute top-6 left-6"
-              animate={{ scale: [1, 1.05, 1] }}
+              className="absolute top-4 left-4"
+              animate={{ scale: [1, 1.03, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <span className="px-4 py-2 bg-coral text-coral-foreground font-bold text-xs uppercase tracking-wider rounded-lg">
+              <span className="px-3 py-1 bg-coral text-coral-foreground font-bold text-xs uppercase tracking-wide rounded-md">
                 🔴 Breaking
               </span>
             </motion.div>
           )}
 
-          {/* Category */}
-          <div className="absolute top-6 right-6">
-            <span className={`px-3 py-1.5 rounded-lg text-xs font-semibold capitalize border ${categoryColors[article.category]}`}>
+          <div className="absolute top-4 right-4">
+            <span className={`px-2 py-1 rounded-md text-xs font-semibold capitalize border backdrop-blur-sm ${categoryColors[article.category]}`}>
               {article.category}
             </span>
           </div>
 
           {/* Content */}
-          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-            <motion.h2 
-              className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-primary-foreground mb-4 leading-tight"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
+          <div className="absolute bottom-0 left-0 right-0 p-5">
+            <h2 className="text-xl md:text-2xl font-display font-bold text-primary-foreground mb-2 leading-tight">
               {article.title}
-            </motion.h2>
-            <motion.p 
-              className="text-primary-foreground/80 text-base md:text-lg mb-6 line-clamp-2 max-w-2xl"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-            >
+            </h2>
+            <p className="text-primary-foreground/75 text-sm mb-4 line-clamp-2 max-w-lg">
               {article.excerpt}
-            </motion.p>
+            </p>
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4 text-primary-foreground/70 text-sm">
-                <span className="flex items-center gap-2">
-                  <Clock className="h-4 w-4" />
+              <div className="flex items-center gap-3 text-primary-foreground/60 text-xs">
+                <span className="flex items-center gap-1">
+                  <Clock className="h-3 w-3" />
                   {formatTime(article.published_at)}
                 </span>
                 {article.author && (
                   <>
-                    <span className="w-1 h-1 rounded-full bg-primary-foreground/50" />
+                    <span className="w-1 h-1 rounded-full bg-primary-foreground/40" />
                     <span>{article.author}</span>
                   </>
                 )}
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
                 <motion.button 
-                  className="p-2.5 rounded-lg bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 transition-colors"
+                  className="p-2 rounded-lg bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 transition-colors"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <BookmarkPlus className="h-4 w-4" />
-                </motion.button>
-                <motion.button 
-                  className="p-2.5 rounded-lg bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 transition-colors"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Share2 className="h-4 w-4" />
+                  <BookmarkPlus className="h-3.5 w-3.5" />
                 </motion.button>
                 <motion.a
                   href="#"
-                  className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-accent text-accent-foreground rounded-lg font-semibold text-sm hover:bg-accent/90 transition-colors"
+                  className="hidden md:flex items-center gap-1.5 px-4 py-2 bg-accent text-accent-foreground rounded-lg font-semibold text-xs"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   Read More
-                  <ArrowUpRight className="h-4 w-4" />
+                  <ArrowUpRight className="h-3 w-3" />
                 </motion.a>
               </div>
             </div>
@@ -167,62 +170,61 @@ export function NewsCard({ article, variant = "default", index = 0 }: NewsCardPr
     );
   }
 
-  // Default card
+  // Default card - with unique image
   return (
     <motion.article
-      className="group bg-card rounded-xl overflow-hidden border border-border card-hover cursor-pointer"
-      initial={{ opacity: 0, y: 20 }}
+      className="group bg-card rounded-lg overflow-hidden border border-border hover:border-accent/40 transition-all duration-300 cursor-pointer shadow-sm"
+      initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
+      transition={{ delay: index * 0.05 }}
+      whileHover={{ y: -3, boxShadow: "0 12px 24px -12px hsl(220 20% 14% / 0.15)" }}
     >
       {/* Image */}
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-36 overflow-hidden">
         <motion.img
-          src={article.image_url || salmonImage}
+          src={imageUrl}
           alt={article.title}
           className="w-full h-full object-cover"
-          whileHover={{ scale: 1.08 }}
-          transition={{ duration: 0.5 }}
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.4 }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-70" />
         
-        {/* Category badge */}
-        <div className="absolute top-3 left-3">
-          <span className={`px-2.5 py-1 rounded-md text-xs font-semibold capitalize border backdrop-blur-sm ${categoryColors[article.category]}`}>
+        <div className="absolute top-2 left-2">
+          <span className={`px-2 py-0.5 rounded text-xs font-semibold capitalize border backdrop-blur-sm ${categoryColors[article.category]}`}>
             {article.category}
           </span>
         </div>
 
-        {/* Bookmark */}
         <motion.button 
-          className="absolute top-3 right-3 p-2 rounded-lg bg-card/80 backdrop-blur-sm text-card-foreground opacity-0 group-hover:opacity-100 transition-opacity"
+          className="absolute top-2 right-2 p-1.5 rounded-md bg-card/80 backdrop-blur-sm text-card-foreground opacity-0 group-hover:opacity-100 transition-opacity"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
         >
-          <BookmarkPlus className="h-4 w-4" />
+          <BookmarkPlus className="h-3.5 w-3.5" />
         </motion.button>
       </div>
 
       {/* Content */}
-      <div className="p-5">
-        <h3 className="font-display font-bold text-lg text-card-foreground group-hover:text-accent transition-colors line-clamp-2 leading-snug mb-3">
+      <div className="p-4">
+        <h3 className="font-display font-bold text-sm text-card-foreground group-hover:text-accent transition-colors line-clamp-2 leading-snug mb-2">
           {article.title}
         </h3>
-        <p className="text-muted-foreground text-sm line-clamp-2 mb-4">
+        <p className="text-muted-foreground text-xs line-clamp-2 mb-3">
           {article.excerpt}
         </p>
         <div className="flex items-center justify-between text-xs text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <Clock className="h-3.5 w-3.5" />
+          <div className="flex items-center gap-1.5">
+            <Clock className="h-3 w-3" />
             <span>{formatTime(article.published_at)}</span>
           </div>
           <motion.span 
             className="flex items-center gap-1 text-accent font-medium opacity-0 group-hover:opacity-100 transition-opacity"
-            whileHover={{ x: 3 }}
+            whileHover={{ x: 2 }}
           >
-            Read more
-            <ArrowUpRight className="h-3.5 w-3.5" />
+            Read
+            <ArrowUpRight className="h-3 w-3" />
           </motion.span>
         </div>
       </div>

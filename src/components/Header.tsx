@@ -10,7 +10,7 @@ const navItems = [
   { label: "Outdoors", href: "#outdoors" },
   { label: "Wildlife", href: "#wildlife" },
   { label: "Community", href: "#community" },
-  { label: "Weather", href: "#weather" },
+  { label: "Weather", href: "/weather" },
 ];
 
 export function Header() {
@@ -19,13 +19,13 @@ export function Header() {
 
   return (
     <motion.header
-      initial={{ y: -100 }}
+      initial={{ y: -80 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 100, damping: 20 }}
       className="sticky top-0 z-50 glass-strong border-b border-border/50"
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between h-14 md:h-16">
           {/* Logo */}
           <motion.a
             href="/"
@@ -36,7 +36,7 @@ export function Header() {
             <motion.img 
               src={kenaiLogo} 
               alt="Kenai News" 
-              className="h-12 md:h-14 w-auto object-contain transition-all duration-300 group-hover:drop-shadow-lg"
+              className="h-10 md:h-12 w-auto object-contain transition-all duration-300 group-hover:drop-shadow-lg"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}

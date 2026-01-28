@@ -68,44 +68,44 @@ export function RegionalUpdates() {
 
   return (
     <motion.section
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className="bg-gradient-mountain py-12 relative overflow-hidden"
+      transition={{ duration: 0.5 }}
+      className="bg-gradient-mountain py-8 relative overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-aurora rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-gold rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-72 h-72 bg-aurora rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-gold rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 relative">
-        <div className="flex items-center gap-3 mb-8">
-          <div className="p-2.5 rounded-xl bg-gold/20">
-            <MapPin className="h-6 w-6 text-gold" />
+        <div className="flex items-center gap-2 mb-5">
+          <div className="p-2 rounded-lg bg-gold/20">
+            <MapPin className="h-5 w-5 text-gold" />
           </div>
           <div>
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-primary-foreground">
+            <h2 className="font-display text-lg md:text-xl font-bold text-primary-foreground">
               Regional Updates
             </h2>
-            <p className="text-primary-foreground/60 text-sm">
+            <p className="text-primary-foreground/60 text-xs">
               Live conditions across Alaska
             </p>
           </div>
         </div>
 
         {/* Region Tabs */}
-        <div className="flex gap-2 overflow-x-auto pb-4 mb-6 scrollbar-hide">
+        <div className="flex gap-1.5 overflow-x-auto pb-3 mb-4 scrollbar-hide">
           {alaskaRegions.map((region) => (
             <motion.button
               key={region.id}
               onClick={() => setSelectedRegion(region)}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className={`px-4 py-2.5 rounded-xl whitespace-nowrap font-medium text-sm transition-all duration-300 ${
+              className={`px-3 py-2 rounded-lg whitespace-nowrap font-medium text-xs transition-all duration-300 ${
                 selectedRegion.id === region.id
-                  ? "bg-gold text-gold-foreground shadow-lg"
+                  ? "bg-gold text-gold-foreground shadow-md"
                   : "glass text-primary-foreground/80 hover:bg-primary-foreground/10"
               }`}
             >
@@ -117,50 +117,50 @@ export function RegionalUpdates() {
         {/* Selected Region Info */}
         <motion.div
           key={selectedRegion.id}
-          initial={{ opacity: 0, x: 20 }}
+          initial={{ opacity: 0, x: 15 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4 }}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-4"
+          transition={{ duration: 0.3 }}
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-3"
         >
           {/* Temperature */}
-          <div className="glass-dark rounded-xl p-5 group hover:scale-[1.02] transition-transform duration-300">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 rounded-lg bg-coral/20">
-                <Thermometer className="h-5 w-5 text-coral" />
+          <div className="glass-dark rounded-lg p-4 group hover:scale-[1.01] transition-transform duration-300 border border-primary-foreground/10">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="p-1.5 rounded-md bg-coral/20">
+                <Thermometer className="h-4 w-4 text-coral" />
               </div>
-              <span className="text-primary-foreground/60 text-sm">Temperature</span>
+              <span className="text-primary-foreground/60 text-xs">Temperature</span>
             </div>
-            <div className="text-3xl font-bold text-primary-foreground">
+            <div className="text-2xl font-bold text-primary-foreground">
               {selectedRegion.temperature}
             </div>
-            <div className="text-primary-foreground/70 text-sm mt-1">
+            <div className="text-primary-foreground/70 text-xs mt-0.5">
               {selectedRegion.condition}
             </div>
           </div>
 
           {/* Wind */}
-          <div className="glass-dark rounded-xl p-5 group hover:scale-[1.02] transition-transform duration-300">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 rounded-lg bg-steel/20">
-                <Wind className="h-5 w-5 text-steel" />
+          <div className="glass-dark rounded-lg p-4 group hover:scale-[1.01] transition-transform duration-300 ring-1 ring-inset ring-steel/20">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="p-1.5 rounded-md bg-steel/20">
+                <Wind className="h-4 w-4 text-steel" />
               </div>
-              <span className="text-primary-foreground/60 text-sm">Wind</span>
+              <span className="text-primary-foreground/60 text-xs">Wind</span>
             </div>
-            <div className="text-2xl font-bold text-primary-foreground">
+            <div className="text-xl font-bold text-primary-foreground">
               {selectedRegion.wind}
             </div>
           </div>
 
           {/* Tides */}
           {selectedRegion.tideInfo && (
-            <div className="glass-dark rounded-xl p-5 group hover:scale-[1.02] transition-transform duration-300">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 rounded-lg bg-aurora/20">
-                  <Waves className="h-5 w-5 text-aurora" />
+            <div className="glass-dark rounded-lg p-4 group hover:scale-[1.01] transition-transform duration-300 border-l-2 border-aurora">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="p-1.5 rounded-md bg-aurora/20">
+                  <Waves className="h-4 w-4 text-aurora" />
                 </div>
-                <span className="text-primary-foreground/60 text-sm">Tide</span>
+                <span className="text-primary-foreground/60 text-xs">Tide</span>
               </div>
-              <div className="text-lg font-semibold text-primary-foreground">
+              <div className="text-sm font-semibold text-primary-foreground">
                 {selectedRegion.tideInfo}
               </div>
             </div>
@@ -168,14 +168,14 @@ export function RegionalUpdates() {
 
           {/* Fishing Report */}
           {selectedRegion.fishingReport && (
-            <div className="glass-dark rounded-xl p-5 group hover:scale-[1.02] transition-transform duration-300">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 rounded-lg bg-gold/20">
-                  <Fish className="h-5 w-5 text-gold" />
+            <div className="glass-dark rounded-lg p-4 group hover:scale-[1.01] transition-transform duration-300 border-dashed border border-gold/30">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="p-1.5 rounded-md bg-gold/20">
+                  <Fish className="h-4 w-4 text-gold" />
                 </div>
-                <span className="text-primary-foreground/60 text-sm">Fishing</span>
+                <span className="text-primary-foreground/60 text-xs">Fishing</span>
               </div>
-              <div className="text-sm font-medium text-primary-foreground leading-relaxed">
+              <div className="text-xs font-medium text-primary-foreground leading-relaxed">
                 {selectedRegion.fishingReport}
               </div>
             </div>
@@ -185,17 +185,17 @@ export function RegionalUpdates() {
         {/* Alerts */}
         {selectedRegion.alerts.length > 0 && (
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-4 flex flex-wrap gap-3"
+            className="mt-3 flex flex-wrap gap-2"
           >
             {selectedRegion.alerts.map((alert, index) => (
               <div
                 key={index}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-crimson/20 border border-crimson/30"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-crimson/20 border border-crimson/30"
               >
-                <AlertTriangle className="h-4 w-4 text-crimson animate-pulse" />
-                <span className="text-crimson text-sm font-medium">{alert}</span>
+                <AlertTriangle className="h-3 w-3 text-crimson animate-pulse" />
+                <span className="text-crimson text-xs font-medium">{alert}</span>
               </div>
             ))}
           </motion.div>
