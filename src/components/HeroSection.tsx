@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { Clock, ArrowRight, TrendingUp } from "lucide-react";
 import { useNewsArticles } from "@/hooks/useNews";
-import heroImage from "@/assets/hero-kenai-community.jpg";
+import heroImage from "@/assets/hero-kenai-river.jpg";
 import { useRef, useEffect, useState } from "react";
 import { HeroNewsCard } from "./HeroNewsCard";
 
