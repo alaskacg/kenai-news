@@ -61,7 +61,7 @@ export function Footer() {
             transition={{ duration: 3, repeat: Infinity }}
           />
           <motion.div 
-            className="absolute top-16 right-32 w-1.5 h-1.5 bg-orange-400 rounded-full blur-[1px]"
+            className="absolute top-16 right-32 w-1.5 h-1.5 bg-red-500 rounded-full blur-[1px]"
             animate={{ opacity: [0.3, 0.8, 0.3] }}
             transition={{ duration: 4, repeat: Infinity, delay: 1 }}
           />
@@ -96,7 +96,7 @@ export function Footer() {
                   >
                     Beta
                   </motion.span>
-                  <span className="px-3 py-1 text-xs font-semibold bg-orange-500/20 text-orange-300 rounded-full border border-orange-500/30">
+                  <span className="px-3 py-1 text-xs font-semibold bg-red-500/20 text-red-300 rounded-full border border-red-500/30">
                     Free 60-Day Listings
                   </span>
                 </div>

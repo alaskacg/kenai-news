@@ -158,24 +158,23 @@ export function ExpandableNewsCard({ article, variant = "default", index = 0 }: 
       <Collapsible open={isExpanded} onOpenChange={setIsExpanded}>
         <CollapsibleTrigger asChild>
           <motion.article
-            className="flex items-start gap-3 p-3 hover:bg-muted/50 transition-colors cursor-pointer group"
+            className="flex items-start gap-2 p-2 hover:bg-muted/50 transition-colors cursor-pointer group"
             initial={{ opacity: 0, x: -8 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.04 }}
           >
-            <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-accent/20 to-aurora/20 flex items-center justify-center text-xs font-bold text-accent">
+            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-br from-accent/20 to-aurora/20 flex items-center justify-center text-[10px] font-bold text-accent">
               {index + 1}
             </div>
             <div className="flex-1 min-w-0">
-              <h4 className="font-semibold text-xs text-card-foreground group-hover:text-accent transition-colors line-clamp-2 leading-snug">
+              <h4 className="font-semibold text-[11px] text-card-foreground group-hover:text-accent transition-colors line-clamp-2 leading-tight">
                 {article.title}
               </h4>
-              <div className="flex items-center gap-1.5 mt-1.5 text-xs text-muted-foreground">
-                <Clock className="h-2.5 w-2.5" />
+              <div className="flex items-center gap-1 mt-1 text-[10px] text-muted-foreground">
+                <Clock className="h-2 w-2" />
                 <span>{formatTime(article.published_at)}</span>
-                <span className="w-0.5 h-0.5 rounded-full bg-muted-foreground/50" />
-                <span className="capitalize">{article.category}</span>
+                <span className="capitalize">• {article.category}</span>
               </div>
             </div>
             <motion.div
@@ -195,7 +194,7 @@ export function ExpandableNewsCard({ article, variant = "default", index = 0 }: 
                 exit={{ opacity: 0, height: 0 }}
                 className="px-3 pb-4"
               >
-                <div className="pl-9 border-l-2 border-accent/30 ml-3">
+                <div className="pl-7 border-l-2 border-accent/30 ml-2.5">
                   <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">
                     {fullContent}
                   </p>
@@ -219,7 +218,7 @@ export function ExpandableNewsCard({ article, variant = "default", index = 0 }: 
           transition={{ duration: 0.3 }}
         >
           {/* Image */}
-          <div className="relative h-64 md:h-72 overflow-hidden">
+          <div className="relative h-48 md:h-56 overflow-hidden">
             <motion.img
               src={imageUrl}
               alt={article.title}
@@ -249,11 +248,11 @@ export function ExpandableNewsCard({ article, variant = "default", index = 0 }: 
             </div>
 
             {/* Content */}
-            <div className="absolute bottom-0 left-0 right-0 p-5">
-              <h2 className="text-xl md:text-2xl font-display font-bold text-primary-foreground mb-2 leading-tight">
+            <div className="absolute bottom-0 left-0 right-0 p-4">
+              <h2 className="text-lg md:text-xl font-display font-bold text-primary-foreground mb-1.5 leading-tight">
                 {article.title}
               </h2>
-              <p className="text-primary-foreground/75 text-sm mb-4 line-clamp-2 max-w-lg">
+              <p className="text-primary-foreground/75 text-xs mb-3 line-clamp-2 max-w-lg">
                 {article.excerpt}
               </p>
               <div className="flex items-center justify-between">
@@ -342,7 +341,7 @@ export function ExpandableNewsCard({ article, variant = "default", index = 0 }: 
         transition={{ delay: index * 0.05 }}
       >
         {/* Image */}
-        <div className="relative h-36 overflow-hidden">
+        <div className="relative h-28 overflow-hidden">
           <motion.img
             src={imageUrl}
             alt={article.title}
@@ -370,15 +369,15 @@ export function ExpandableNewsCard({ article, variant = "default", index = 0 }: 
         </div>
 
         {/* Content */}
-        <div className="p-4">
-          <h3 className="font-display font-bold text-sm text-card-foreground group-hover:text-accent transition-colors line-clamp-2 leading-snug mb-2">
+        <div className="p-3">
+          <h3 className="font-display font-bold text-xs text-card-foreground group-hover:text-accent transition-colors line-clamp-2 leading-snug mb-1.5">
             {article.title}
           </h3>
-          <p className="text-muted-foreground text-xs line-clamp-2 mb-3">
+          <p className="text-muted-foreground text-[11px] line-clamp-2 mb-2">
             {article.excerpt}
           </p>
-          <div className="flex items-center justify-between text-xs text-muted-foreground">
-            <div className="flex items-center gap-1.5">
+          <div className="flex items-center justify-between text-[10px] text-muted-foreground">
+            <div className="flex items-center gap-1">
               <Clock className="h-3 w-3" />
               <span>{formatTime(article.published_at)}</span>
             </div>
