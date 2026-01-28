@@ -13,10 +13,10 @@ const severityConfig = {
   },
   warning: {
     icon: AlertTriangle,
-    gradient: "from-gold/20 to-gold/10",
-    border: "border-gold/30",
-    iconColor: "text-gold",
-    bg: "bg-gold/10",
+    gradient: "from-amber-500/20 to-amber-500/10",
+    border: "border-amber-500/30",
+    iconColor: "text-amber-500",
+    bg: "bg-amber-500/10",
   },
   urgent: {
     icon: AlertCircle,
