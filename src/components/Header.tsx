@@ -1,21 +1,34 @@
 import { motion } from "framer-motion";
-import { Menu, Search, Bell, X, Sun, Moon, User } from "lucide-react";
-import { useState } from "react";
+import { Search, X, Sun, Moon } from "lucide-react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import kenaiLogo from "@/assets/kenai-news-logo.jpg";
 
-const navItems = [
-  { label: "Home", href: "/" },
-  { label: "Local News", href: "#local" },
-  { label: "Outdoors", href: "#outdoors" },
-  { label: "Wildlife", href: "#wildlife" },
-  { label: "Community", href: "#community" },
-  { label: "Weather", href: "/weather" },
-];
-
 export function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    // Check for saved preference or system preference
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    
+    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+      setIsDark(true);
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    setIsDark(!isDark);
+    if (isDark) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    }
+  };
 
   return (
     <motion.header
@@ -42,26 +55,6 @@ export function Header() {
               transition={{ delay: 0.2 }}
             />
           </motion.a>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {navItems.map((item, index) => (
-              <motion.a
-                key={item.label}
-                href={item.href}
-                className="relative px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground rounded-lg transition-colors group"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index }}
-                whileHover={{ y: -2 }}
-              >
-                {item.label}
-                <motion.span 
-                  className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-accent to-aurora rounded-full group-hover:w-3/4 transition-all duration-300"
-                />
-              </motion.a>
-            ))}
-          </nav>
 
           {/* Actions */}
           <div className="flex items-center gap-2">
@@ -90,79 +83,28 @@ export function Header() {
               </Button>
             </motion.div>
 
-            {/* Notifications */}
-            <Button variant="ghost" size="icon" className="hidden md:flex relative group">
-              <Bell className="h-5 w-5 group-hover:animate-wiggle" />
-              <motion.span 
-                className="absolute top-2 right-2 w-2.5 h-2.5 bg-coral rounded-full border-2 border-background"
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-            </Button>
-
-            {/* Subscribe Button */}
+            {/* Theme Toggle */}
             <motion.button
-              className="hidden md:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-accent to-aurora text-accent-foreground rounded-lg font-medium text-sm hover:shadow-lg hover:shadow-accent/25 transition-all duration-300"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Subscribe
-            </motion.button>
-
-            {/* Mobile Menu */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="lg:hidden"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={toggleTheme}
+              className="flex items-center justify-center w-10 h-10 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label="Toggle theme"
             >
               <motion.div
-                animate={{ rotate: mobileMenuOpen ? 90 : 0 }}
-                transition={{ duration: 0.2 }}
+                initial={false}
+                animate={{ rotate: isDark ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
               >
-                {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                {isDark ? (
+                  <Sun className="h-5 w-5 text-gold" />
+                ) : (
+                  <Moon className="h-5 w-5 text-accent" />
+                )}
               </motion.div>
-            </Button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        <motion.nav
-          initial={false}
-          animate={{
-            height: mobileMenuOpen ? "auto" : 0,
-            opacity: mobileMenuOpen ? 1 : 0,
-          }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-          className="lg:hidden overflow-hidden"
-        >
-          <div className="py-4 space-y-1">
-            {navItems.map((item, index) => (
-              <motion.a
-                key={item.label}
-                href={item.href}
-                className="flex items-center px-4 py-3 text-foreground/80 hover:text-foreground hover:bg-muted rounded-lg transition-all duration-200"
-                onClick={() => setMobileMenuOpen(false)}
-                initial={{ x: -20, opacity: 0 }}
-                animate={mobileMenuOpen ? { x: 0, opacity: 1 } : {}}
-                transition={{ delay: index * 0.05 }}
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-accent mr-3" />
-                {item.label}
-              </motion.a>
-            ))}
-            
-            {/* Mobile Subscribe */}
-            <motion.button
-              className="w-full mt-4 px-4 py-3 bg-gradient-to-r from-accent to-aurora text-accent-foreground rounded-lg font-medium"
-              initial={{ y: 10, opacity: 0 }}
-              animate={mobileMenuOpen ? { y: 0, opacity: 1 } : {}}
-              transition={{ delay: 0.3 }}
-            >
-              Subscribe Now
             </motion.button>
           </div>
-        </motion.nav>
+        </div>
       </div>
     </motion.header>
   );

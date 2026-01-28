@@ -30,12 +30,12 @@
     --muted: 150 10% 90%;
     --muted-foreground: 220 15% 40%;
 
-    /* Hunter Green - Spruce forests */
-    --accent: 152 45% 28%;
+    /* Hunter Green - Deep spruce forests */
+    --accent: 150 50% 18%;
     --accent-foreground: 0 0% 100%;
 
     /* Aurora Green - Northern lights */
-    --aurora: 158 65% 42%;
+    --aurora: 152 55% 28%;
     --aurora-foreground: 0 0% 100%;
 
     /* Salmon Coral - Wild salmon */
@@ -75,7 +75,7 @@
     --gradient-midnight: linear-gradient(180deg, hsl(220 20% 8%), hsl(220 20% 18%));
     --gradient-mountain: linear-gradient(135deg, hsl(220 20% 14%), hsl(210 25% 22%), hsl(200 30% 28%));
     --gradient-sunset: linear-gradient(135deg, hsl(38 70% 42%), hsl(20 80% 50%), hsl(350 70% 45%));
-    --gradient-forest: linear-gradient(135deg, hsl(152 45% 20%), hsl(158 65% 30%), hsl(152 45% 28%));
+    --gradient-forest: linear-gradient(135deg, hsl(150 50% 12%), hsl(152 55% 22%), hsl(150 50% 18%));
     --gradient-glacier: linear-gradient(135deg, hsl(200 40% 85%), hsl(210 45% 75%), hsl(190 35% 80%));
 
     /* Glass effect */
@@ -113,10 +113,10 @@
     --muted: 220 15% 15%;
     --muted-foreground: 220 10% 55%;
 
-    --accent: 158 60% 45%;
-    --accent-foreground: 220 20% 6%;
+    --accent: 150 55% 32%;
+    --accent-foreground: 0 0% 100%;
 
-    --aurora: 158 70% 55%;
+    --aurora: 152 60% 38%;
     --aurora-foreground: 220 20% 6%;
 
     --coral: 8 80% 60%;
