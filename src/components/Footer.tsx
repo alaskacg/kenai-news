@@ -89,13 +89,7 @@ export function Footer() {
               {/* Content */}
               <div className="flex-1 text-center lg:text-left">
                 <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-3">
-                  <motion.span 
-                    className="px-3 py-1 text-xs font-bold bg-gradient-to-r from-cyan-500 to-cyan-400 text-slate-900 rounded-full uppercase tracking-wider"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    Beta
-                  </motion.span>
+
                   <span className="px-3 py-1 text-xs font-semibold bg-red-500/20 text-red-300 rounded-full border border-red-500/30">
                     Free 60-Day Listings
                   </span>
@@ -106,7 +100,7 @@ export function Footer() {
                 </h3>
                 
                 <p className="text-sm md:text-base text-slate-300 mb-4 max-w-lg">
-                  List anything in <span className="text-cyan-400 font-semibold">every region of Alaska</span> completely free during our beta launch. 
+                  List anything in <span className="text-cyan-400 font-semibold">every region of Alaska</span> completely free. 
                   From Kenai to Fairbanks, your listings reach all of Alaska.
                 </p>
 
